@@ -25,6 +25,7 @@ final case class Fertilizing(id: Long = 0,
 final case class Pesticiding(id: Long = 0,
                              occured: Long = 0) extends Entity
 
-final case class Watering(id: Long = 0) extends Entity
+final case class Watering(id: Long = 0,
+                          occured: Long = 0) extends Entity
 
 final case class Weeding(id: Long = 0) extends Entity
