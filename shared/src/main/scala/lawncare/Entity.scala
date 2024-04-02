@@ -12,3 +12,6 @@ sealed trait Entity:
   val id: Long
 
 final case class Mowing(id: Long = 0) extends Entity
+
+final case class Trimming(id: Long = 0) extends Entity
+
