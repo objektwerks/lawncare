@@ -34,10 +34,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/walker-mac-0.11.jar
-2. java -jar .assembly/walker-m1-0.11.jar
-3. java -jar .assembly/walker-win-0.11.jar
-4. java -jar .assembly/walker-linux-0.11.jar
+1. java -jar .assembly/lawncare-mac-0.11.jar
+2. java -jar .assembly/lawncare-m1-0.11.jar
+3. java -jar .assembly/lawncare-win-0.11.jar
+4. java -jar .assembly/lawncare-linux-0.11.jar
 
 Deploy
 ------
@@ -55,4 +55,16 @@ Postgresql
 3. logs:
     1. on osx intel: /usr/local/var/log/postgres.log
     2. on m1: /opt/homebrew/var/log/postgres.log
+
+Database
+--------
+>Example database url: postgresql://localhost:5432/lawncare?user=mycomputername&password=lawncare"
+1. psql postgres
+2. CREATE DATABASE lawncare OWNER [your computer name];
+3. GRANT ALL PRIVILEGES ON DATABASE lawncare TO [your computer name];
+4. \l
+5. \q
+6. psql lawncare
+7. \i ddl.sql
+8. \q
 
