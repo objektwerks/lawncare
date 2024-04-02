@@ -1,5 +1,7 @@
 package lawncare
 
+import java.time.LocalDate
+
 sealed trait Entity:
   val id: Long
 
@@ -9,7 +11,7 @@ final case class Property(id: Long = 0,
                           owner: String,
                           email: String = "",
                           location: String,
-                          joined: Long) extends Entity
+                          joined: String = LocalDate.now().toString()) extends Entity
 
 final case class Session(id: Long = 0,
                          propertyId: Long,
@@ -23,4 +25,4 @@ final case class Session(id: Long = 0,
                          watered: Boolean = false,
                          repaired: Boolean = false,
                          note: String = "",
-                         occured: Long) extends Entity
+                         occured: String = LocalDate.now().toString()) extends Entity
