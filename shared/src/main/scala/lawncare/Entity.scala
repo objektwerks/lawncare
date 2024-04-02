@@ -7,8 +7,8 @@ trim ( plant, tree )
 clean ( blower )
 fertilize ( nitrogen, phosphorus and potassium )
 pesticide ( herbicides, insecticides, nematicides, fungicides )
-water ( sprinkler system, pipes, heads, on/off | uncapped/capped )
-repair ( sprinkler system )
+water
+repair ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 weeding
 */
 sealed trait Entity:
@@ -26,5 +26,6 @@ final case class Session(id: Long = 0,
                          fertilized: Boolean = false,
                          pesticided: Boolean = false,
                          weeded: Boolean = false,
-                         repaired: Boolean = false, // sprinkler
+                         watered: Boolean = false,
+                         repaired: Boolean = false,
                          occured: Long = 0) extends Entity
