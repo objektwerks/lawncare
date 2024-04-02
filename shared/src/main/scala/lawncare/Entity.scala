@@ -4,7 +4,10 @@ sealed trait Entity:
   val id: Long
 
 final case class Property(id: Long = 0,
+                          license: String = Pin.newInstance,
+                          pin: String = Pin.newInstance,
                           owner: String,
+                          email: String = "",
                           location: String) extends Entity
 
 final case class Session(id: Long = 0,
