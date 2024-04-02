@@ -6,7 +6,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.collection.mutable
 
 final class PinTest extends AnyFunSuite with Matchers:
-  test("pin uuid"):
+  test("pin"):
     val pins = mutable.Set.empty[String]
     for i <- 1 to 1_000_000
     do
