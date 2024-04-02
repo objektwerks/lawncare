@@ -23,6 +23,7 @@ final case class Trimming(id: Long = 0,
                           occured: Long = 0) extends Entity
 
 final case class Fertilizing(id: Long = 0,
+                             propertyId: Long,
                              occured: Long = 0) extends Entity
 
 final case class Pesticiding(id: Long = 0,
