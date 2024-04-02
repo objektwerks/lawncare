@@ -29,4 +29,5 @@ final case class Session(id: Long = 0,
                          weeded: Boolean = false,
                          watered: Boolean = false,
                          repaired: Boolean = false,
+                         note: String = "",
                          occured: Long = 0) extends Entity
