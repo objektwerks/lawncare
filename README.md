@@ -38,3 +38,10 @@ Execute Client
 2. java -jar .assembly/walker-m1-0.11.jar
 3. java -jar .assembly/walker-win-0.11.jar
 4. java -jar .assembly/walker-linux-0.11.jar
+
+Deploy
+------
+>Consider these options:
+1. [jDeploy](https://www.npmjs.com/package/jdeploy)
+2. [Conveyor](https://hydraulic.software/index.html)
+
