@@ -2,6 +2,21 @@ Lawncare
 --------
 Lawn care app using Scala 3.
 
+Model
+-----
+* Property 1 ---> * Session
+
+
+mow
+edge ( driveway, curbing )
+trim ( plant, tree )
+clean ( blower )
+fertilize ( nitrogen, phosphorus and potassium )
+pesticide ( herbicides, insecticides, nematicides, fungicides )
+water
+repair ( sprinkler system, pipes, heads, on/off | uncapped/capped )
+weeding
+
 Build
 -----
 1. sbt clean compile
