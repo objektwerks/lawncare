@@ -68,3 +68,16 @@ Database
 7. \i ddl.sql
 8. \q
 
+DDL
+---
+>Alternatively run: psql -d lawncare -f ddl.sql
+1. psql lawncare
+2. \i ddl.sql
+3. \q
+
+Drop
+----
+1. psql postgres
+2. drop database lawncare;
+3. \q
+
