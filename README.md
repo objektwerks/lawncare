@@ -13,3 +13,7 @@ Test
 Server Run
 ----------
 1. sbt server/run
+
+Client Run
+----------
+1. sbt client/run
