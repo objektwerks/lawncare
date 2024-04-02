@@ -2,14 +2,6 @@ DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
 
 /*
-final case class Property(id: Long = 0,
-                          license: String = Pin.newInstance,
-                          pin: String = Pin.newInstance,
-                          owner: String,
-                          email: String = "",
-                          location: String,
-                          joined: Long) extends Entity
-
 final case class Session(id: Long = 0,
                          propertyId: Long,
                          mowed: Boolean = true,
