@@ -8,4 +8,7 @@ fertilizing ( nitrogen, phosphorus and potassium )
 pesticides ( insecticides, herbicides and fungicides )
 watering ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 */
-sealed trait Entity
+sealed trait Entity:
+  val id: Long
+
+final case class Mowing(id: Long = 0) extends Entity
