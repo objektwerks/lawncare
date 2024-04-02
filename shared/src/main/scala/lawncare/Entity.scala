@@ -5,13 +5,16 @@ import java.time.LocalDate
 sealed trait Entity:
   val id: Long
 
+object Entity:
+  def now(): String = LocalDate.now().toString()
+
 final case class Property(id: Long = 0,
                           license: String = Pin.newInstance,
                           pin: String = Pin.newInstance,
                           owner: String,
                           email: String = "",
                           location: String,
-                          joined: String = LocalDate.now().toString()) extends Entity
+                          joined: String = Entity.now()) extends Entity
 
 final case class Session(id: Long = 0,
                          propertyId: Long,
@@ -25,4 +28,4 @@ final case class Session(id: Long = 0,
                          watered: Boolean = false,
                          repaired: Boolean = false,
                          note: String = "",
-                         occured: String = LocalDate.now().toString()) extends Entity
+                         occured: String = Entity.now()) extends Entity
