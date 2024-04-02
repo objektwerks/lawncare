@@ -13,6 +13,7 @@ sealed trait Entity:
   val id: Long
 
 final case class Property(id: Long = 0,
+                          owner: String,
                           location: String) extends Entity
 final case class Mowing(id: Long = 0,
                         propertyId: Long,
