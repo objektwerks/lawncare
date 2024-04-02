@@ -30,3 +30,11 @@ Client Assembly
 2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
 3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
 4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
+
+Execute Client
+--------------
+>To execute an assembled jar locally:
+1. java -jar .assembly/walker-mac-0.11.jar
+2. java -jar .assembly/walker-m1-0.11.jar
+3. java -jar .assembly/walker-win-0.11.jar
+4. java -jar .assembly/walker-linux-0.11.jar
