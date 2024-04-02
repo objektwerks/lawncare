@@ -1,11 +1,16 @@
 package lawncare
 
+import com.github.plokhotnyuk.jsoniter_scala.core.*
+import com.github.plokhotnyuk.jsoniter_scala.macros.*
+
 import java.time.LocalDate
 
 sealed trait Entity:
   val id: Long
 
 object Entity:
+  given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity]
+
   def now(): String = LocalDate.now().toString()
   def localDate(now: String): LocalDate = LocalDate.parse(now)
 
