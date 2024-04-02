@@ -11,8 +11,9 @@ weeding
 */
 sealed trait Entity:
   val id: Long
-  val occured: Long
 
+final case class Property(id: Long = 0,
+                          location: String) extends Entity
 final case class Mowing(id: Long = 0,
                         occured: Long = 0) extends Entity
 
