@@ -1,12 +1,12 @@
 package lawncare
 
 /*
-mowing
-edging ( driveway, curbing )
-trimming ( plant, tree )
-fertilizing ( nitrogen, phosphorus and potassium )
-pesticides ( herbicides, insecticides, nematicides, fungicides )
-watering ( sprinkler system, pipes, heads, on/off | uncapped/capped )
+mow
+edge ( driveway, curbing )
+trim ( plant, tree )
+fertilize ( nitrogen, phosphorus and potassium )
+pesticide ( herbicides, insecticides, nematicides, fungicides )
+water ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 */
 sealed trait Entity:
   val id: Long
