@@ -2,8 +2,8 @@ package lawncare
 
 /*
 mowing
-edging
-trimming
+edging ( driveway, curbing )
+trimming ( plant, tree )
 fertilizing ( nitrogen, phosphorus and potassium )
 pesticides ( insecticides, herbicides and fungicides )
 watering
