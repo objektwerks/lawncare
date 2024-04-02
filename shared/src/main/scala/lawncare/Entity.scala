@@ -8,7 +8,8 @@ final case class Property(id: Long = 0,
                           pin: String = Pin.newInstance,
                           owner: String,
                           email: String = "",
-                          location: String) extends Entity
+                          location: String,
+                          joined: Long) extends Entity
 
 final case class Session(id: Long = 0,
                          propertyId: Long,
