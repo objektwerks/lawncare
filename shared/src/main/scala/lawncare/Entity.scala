@@ -22,6 +22,9 @@ final case class Property(id: Long = 0,
                           location: String,
                           joined: String = Entity.now()) extends Entity
 
+object Property:
+  given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
+
 final case class Session(id: Long = 0,
                          propertyId: Long,
                          mowed: Boolean = true,
