@@ -9,3 +9,7 @@ Build
 Test
 ----
 1. sbt clean test
+
+Server Run
+----------
+1. sbt server/run
