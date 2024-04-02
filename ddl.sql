@@ -8,7 +8,7 @@ CREATE TABLE property (
   owner VARCHAR NOT NULL,
   email VARCHAR NOT NULL,
   location VARCHAR NOT NULL,
-  joined BIGINT NOT NULL
+  joined VARCHAR NOT NULL
 );
 
 CREATE TABLE session (
@@ -24,5 +24,5 @@ CREATE TABLE session (
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
   note VARCHAR,
-  occured BIGINT NOT NULL
+  occured VARCHAR NOT NULL
 );
