@@ -10,7 +10,7 @@ object Client extends JFXApp3 with LazyLogging:
   private val context = Context(conf)
 
   override def start(): Unit =
-    val view = View(context, model)
+    val view = View(context)
     stage = new JFXApp3.PrimaryStage:
       scene = view.scene
       title = context.windowTitle
