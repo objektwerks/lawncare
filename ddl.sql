@@ -29,13 +29,8 @@ CREATE TABLE property (
 
 CREATE TABLE session (
   id BIGSERIAL PRIMARY KEY,
-  walker_id BIGINT REFERENCES walker(id),
-  weight INT NOT NULL,
-  weight_unit CHAR(2) NOT NULL,
-  distance INT NOT NULL,
-  distance_unit CHAR(2) NOT NULL,
-  hours INT NOT NULL,
-  minutes INT NOT NULL,
-  calories INT NOT NULL,
-  datetime BIGINT NOT NULL
+  property_id BIGINT REFERENCES property(id),
+  mowed BOOLEAN NOT NULL,
+
+  occured BIGINT NOT NULL
 );
