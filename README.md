@@ -104,3 +104,9 @@ export LAWNCARE_EMAIL_HOST="your-email.provider.com"
 export LAWNCARE_EMAIL_ADDRESS="your-email@provider.com"
 export LAWNCARE_EMAIL_PASSWORD="your-email-password"
 ```
+
+Resources
+---------
+* [JavaFX](https://openjfx.io/index.html)
+* [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
+* [ScalaFX](http://www.scalafx.org/)
