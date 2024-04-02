@@ -5,5 +5,6 @@ mowing
 edging
 trimming
 fertilizing
+watering
 */
 sealed trait Entity
