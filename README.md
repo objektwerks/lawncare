@@ -4,7 +4,7 @@ Lawn care app using Scala 3.
 
 Model
 -----
-* Property 1 ---> * Session
+* Property 1 --> * Session
 
 Session
 -------
