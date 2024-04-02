@@ -1,16 +1,5 @@
 package lawncare
 
-/*
-mow
-edge ( driveway, curbing )
-trim ( plant, tree )
-clean ( blower )
-fertilize ( nitrogen, phosphorus and potassium )
-pesticide ( herbicides, insecticides, nematicides, fungicides )
-water
-repair ( sprinkler system, pipes, heads, on/off | uncapped/capped )
-weeding
-*/
 sealed trait Entity:
   val id: Long
 
