@@ -1,13 +1,38 @@
 DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
 
+/*
+final case class Property(id: Long = 0,
+                          license: String = Pin.newInstance,
+                          pin: String = Pin.newInstance,
+                          owner: String,
+                          email: String = "",
+                          location: String,
+                          joined: Long) extends Entity
+
+final case class Session(id: Long = 0,
+                         propertyId: Long,
+                         mowed: Boolean = true,
+                         edged: Boolean = true,
+                         cleaned: Boolean = true,
+                         trimmed: Boolean = false,
+                         fertilized: Boolean = false,
+                         pesticided: Boolean = false,
+                         weeded: Boolean = false,
+                         watered: Boolean = false,
+                         repaired: Boolean = false,
+                         note: String = "",
+                         occured: Long = 0) extends Entity
+*/
+
 CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
-  license CHAR(36) UNIQUE NOT NULL,
-  email_address VARCHAR UNIQUE NOT NULL,
-  pin CHAR(7) NOT NULL,
-  activated BIGINT NOT NULL,
-  deactivated BIGINT NOT NULL
+  license CHAR(7) UNIQUE NOT NULL,
+  pin CHAR(7) UNIQUE NOT NULL,
+  owner VARCHAR NOT NULL,
+  email VARCHAR NOT NULL,
+  location VARCHAR NOT NULL,
+  joined BIGINT NOT NULL
 );
 
 CREATE TABLE session (
