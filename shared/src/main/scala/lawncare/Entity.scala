@@ -21,3 +21,5 @@ final case class Fertilize(id: Long = 0) extends Entity
 final case class Pesticide(id: Long = 0) extends Entity
 
 final case class Water(id: Long = 0) extends Entity
+
+final case class Weeding(id: Long = 0) extends Entity
