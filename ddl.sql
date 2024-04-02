@@ -1,22 +1,6 @@
 DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
 
-/*
-final case class Session(id: Long = 0,
-                         propertyId: Long,
-                         mowed: Boolean = true,
-                         edged: Boolean = true,
-                         cleaned: Boolean = true,
-                         trimmed: Boolean = false,
-                         fertilized: Boolean = false,
-                         pesticided: Boolean = false,
-                         weeded: Boolean = false,
-                         watered: Boolean = false,
-                         repaired: Boolean = false,
-                         note: String = "",
-                         occured: Long = 0) extends Entity
-*/
-
 CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
   license CHAR(7) UNIQUE NOT NULL,
@@ -31,6 +15,14 @@ CREATE TABLE session (
   id BIGSERIAL PRIMARY KEY,
   property_id BIGINT REFERENCES property(id),
   mowed BOOLEAN NOT NULL,
-
+  edged BOOLEAN NOT NULL,
+  cleaned BOOLEAN NOT NULL,
+  trimmed BOOLEAN NOT NULL,
+  fertilized BOOLEAN NOT NULL,
+  pesticided BOOLEAN NOT NULL,
+  weeded BOOLEAN NOT NULL,
+  watered BOOLEAN NOT NULL,
+  repaired BOOLEAN NOT NULL,
+  note VARCHAR,
   occured BIGINT NOT NULL
 );
