@@ -1,19 +1,13 @@
 DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
 
-CREATE TABLE account (
+CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
   license CHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR UNIQUE NOT NULL,
   pin CHAR(7) NOT NULL,
   activated BIGINT NOT NULL,
   deactivated BIGINT NOT NULL
-);
-
-CREATE TABLE walker (
-  id BIGSERIAL PRIMARY KEY,
-  account_id BIGINT REFERENCES account(id),
-  name VARCHAR(24) NOT NULL
 );
 
 CREATE TABLE session (
@@ -27,9 +21,4 @@ CREATE TABLE session (
   minutes INT NOT NULL,
   calories INT NOT NULL,
   datetime BIGINT NOT NULL
-);
-
-CREATE TABLE fault (
-  cause VARCHAR NOT NULL,
-  occurred VARCHAR NOT NULL
 );
