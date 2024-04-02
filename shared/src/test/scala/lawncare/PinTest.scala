@@ -8,6 +8,6 @@ final class PinTest extends AnyFunSuite with Matchers:
     for i <- 1 to 1_000_000
     do Pin.newInstance.length shouldBe 7
 
-  test("pin uuid")
+  test("pin uuid"):
     for i <- 1 to 1_000_000
     do Pin.newPin.length shouldBe 7
