@@ -81,3 +81,26 @@ Drop
 2. drop database lawncare;
 3. \q
 
+Environment
+-----------
+>The following environment variables must be defined:
+```
+export LAWNCARE_HOST="127.0.0.1"
+export LAWNCARE_PORT=7070
+export LAWNCARE_ENDPOINT="/command"
+
+export LAWNCARE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/lawncare"
+export LAWNCARE_POSTGRESQL_USER="yourusername"
+export LAWNCARE_POSTGRESQL_PASSWORD="lawncare"
+export LAWNCARE_POSTGRESQL_DRIVER="org.postgresql.Driver"
+export LAWNCARE_POSTGRESQL_DB_NAME="lawncare"
+export LAWNCARE_POSTGRESQL_HOST="127.0.0.1"
+export LAWNCARE_POSTGRESQL_PORT=5432
+export LAWNCARE_POSTGRESQL_POOL_INITIAL_SIZE=9
+export LAWNCARE_POSTGRESQL_POOL_MAX_SIZE=32
+export LAWNCARE_POSTGRESQL_POOL_CONNECTION_TIMEOUT_MILLIS=30000
+
+export LAWNCARE_EMAIL_HOST="your-email.provider.com"
+export LAWNCARE_EMAIL_ADDRESS="your-email@provider.com"
+export LAWNCARE_EMAIL_PASSWORD="your-email-password"
+```
