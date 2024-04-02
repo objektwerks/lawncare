@@ -7,6 +7,7 @@ sealed trait Entity:
 
 object Entity:
   def now(): String = LocalDate.now().toString()
+  def localDate(now: String): LocalDate = LocalDate.parse(now)
 
 final case class Property(id: Long = 0,
                           license: String = Pin.newInstance,
