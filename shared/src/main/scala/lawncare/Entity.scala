@@ -35,4 +35,5 @@ final case class Watering(id: Long = 0,
                           occured: Long = 0) extends Entity
 
 final case class Weeding(id: Long = 0,
+                         propertyId: Long,
                          occured: Long = 0) extends Entity
