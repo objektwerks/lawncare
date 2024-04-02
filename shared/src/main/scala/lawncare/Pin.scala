@@ -1,5 +1,7 @@
 package lawncare
 
+import java.util.UUID
+
 import scala.util.Random
 
 object Pin:
@@ -17,3 +19,5 @@ object Pin:
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
     ).mkString
+
+  def newPin: String = UUID.randomUUID().toString().substring(0, 7).toLowerCase()
