@@ -24,7 +24,7 @@ final case class Property(id: Long = 0,
 
 object Property:
   given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
-  given Ordering[Property] = Ordering.by[Property, String](property => property.owner)
+  given Ordering[Property] = Ordering.by[Property, String](property => property.joined).reverse
 
 final case class Session(id: Long = 0,
                          propertyId: Long,
