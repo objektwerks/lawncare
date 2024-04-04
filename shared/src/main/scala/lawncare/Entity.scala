@@ -17,7 +17,6 @@ object Entity:
 final case class Property(id: Long = 0,
                           license: String = Pin.newInstance,
                           pin: String = Pin.newInstance,
-                          owner: String,
                           email: String = "",
                           location: String,
                           joined: String = Entity.now()) extends Entity
