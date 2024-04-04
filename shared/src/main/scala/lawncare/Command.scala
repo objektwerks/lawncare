@@ -29,3 +29,5 @@ final case class SaveProperty(license: String, property: Property) extends Comma
 
 final case class ListSessions(license: String, propertyId: Long) extends Command with License
 final case class SaveSession(license: String, session: Session) extends Command with License
+
+final case class AddFault(license: String, fault: Fault) extends Command with License
