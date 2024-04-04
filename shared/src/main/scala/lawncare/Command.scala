@@ -27,3 +27,5 @@ final case class Login(email: String, pin: String) extends Command
 final case class ListProperties(license: String) extends Command with License
 final case class SaveProperty(license: String, property: Property) extends Command with License
 
+final case class ListSessions(license: String, propertyId: Long) extends Command with License
+final case class SaveSession(license: String, session: Session) extends Command with License
