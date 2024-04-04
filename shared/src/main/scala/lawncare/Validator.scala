@@ -36,5 +36,8 @@ object Validator:
   extension (saveProperty: SaveProperty)
     def isValid: Boolean = saveProperty.license.isLicense && saveProperty.property.isValid
 
+  extension (listSessions: ListSessions)
+    def isValid: Boolean = listSessions.license.isLicense && listSessions.walkerId > 0
+
   extension (addFault: AddFault)
     def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
