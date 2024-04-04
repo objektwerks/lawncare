@@ -58,3 +58,14 @@ object Validator:
     def isValid: Boolean =
       addFault.license.isLicense &&
       addFault.fault.cause.nonEmpty
+
+  extension (command: Command)
+    def isValid: Boolean =
+      command match
+        case register @ Register(_, _)          => register.isValid
+        case login @ Login(_, _)                => login.isValid
+        case listProperties @ ListProperties(_) => listProperties.isValid
+        case saveProperty @ SaveProperty(_, _)  => saveProperty.isValid
+        case listSessions @ ListSessions(_, _)  => listSessions.isValid
+        case saveSession @ SaveSession(_, _)    => saveSession.isValid
+        case addFault @ AddFault(_, _)          => addFault.isValid
