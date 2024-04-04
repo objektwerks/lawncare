@@ -9,6 +9,9 @@ object Command:
   given JsonValueCodec[Command] = JsonCodecMaker.make[Command]
   given JsonValueCodec[License] = JsonCodecMaker.make[License]
 
+  given JsonValueCodec[Register] = JsonCodecMaker.make[Register]
+
+
 sealed trait License:
   val license: String
 
