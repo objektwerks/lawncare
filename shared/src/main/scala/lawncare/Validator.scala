@@ -9,5 +9,8 @@ object Validator:
   extension (register: Register)
     def isValid: Boolean = register.email.isEmail && register.location.nonEmpty
 
+  extension (login: Login)
+    def isValid: Boolean = login.email.isEmail && login.pin.isPin
+
   extension (addFault: AddFault)
     def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
