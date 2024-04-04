@@ -23,6 +23,8 @@ final case class LoggedIn(property: Property) extends Event
 final case class PropertiesListed(properties: List[Property]) extends Event
 final case class PropertySaved(id: Long) extends Event
 
+final case class SessionsListed(sessions: List[Session]) extends Event
+
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
     val message = throwable.getMessage
