@@ -21,6 +21,7 @@ final case class Registered(property: Property) extends Event
 final case class LoggedIn(property: Property) extends Event
 
 final case class PropertiesListed(properties: List[Property]) extends Event
+final case class PropertySaved(id: Long) extends Event
 
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
