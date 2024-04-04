@@ -22,25 +22,39 @@ object Validator:
       session.occured.nonEmpty
 
   extension  (license: License)
-    def isLicense: Boolean = license.license.isLicense
+    def isLicense: Boolean =
+      license.license.isLicense
 
   extension (register: Register)
-    def isValid: Boolean = register.email.isEmail && register.location.nonEmpty
+    def isValid: Boolean =
+      register.email.isEmail &&
+      register.location.nonEmpty
 
   extension (login: Login)
-    def isValid: Boolean = login.email.isEmail && login.pin.isPin
+    def isValid: Boolean =
+      login.email.isEmail &&
+      login.pin.isPin
 
   extension (listPropertiess: ListProperties)
-    def isValid: Boolean = listPropertiess.license.isLicense
+    def isValid: Boolean =
+      listPropertiess.license.isLicense
 
   extension (saveProperty: SaveProperty)
-    def isValid: Boolean = saveProperty.license.isLicense && saveProperty.property.isValid
+    def isValid: Boolean =
+      saveProperty.license.isLicense &&
+      saveProperty.property.isValid
 
   extension (listSessions: ListSessions)
-    def isValid: Boolean = listSessions.license.isLicense && listSessions.propertyId > 0
+    def isValid: Boolean =
+      listSessions.license.isLicense &&
+      listSessions.propertyId > 0
 
   extension (saveSession: SaveSession)
-    def isValid: Boolean = saveSession.license.isLicense && saveSession.session.isValid
+    def isValid: Boolean =
+      saveSession.license.isLicense &&
+      saveSession.session.isValid
 
   extension (addFault: AddFault)
-    def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
+    def isValid: Boolean =
+      addFault.license.isLicense &&
+      addFault.fault.cause.nonEmpty
