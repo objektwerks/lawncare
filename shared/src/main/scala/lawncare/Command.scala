@@ -15,6 +15,8 @@ object Command:
   given JsonValueCodec[ListProperties] = JsonCodecMaker.make[ListProperties]
   given JsonValueCodec[SaveProperty] = JsonCodecMaker.make[SaveProperty]
 
+  given JsonValueCodec[ListSessions] = JsonCodecMaker.make[ListSessions]
+  given JsonValueCodec[SaveSession] = JsonCodecMaker.make[SaveSession]
 
 sealed trait License:
   val license: String
@@ -25,4 +27,3 @@ final case class Login(email: String, pin: String) extends Command
 final case class ListProperties(license: String) extends Command with License
 final case class SaveProperty(license: String, property: Property) extends Command with License
 
-  given JsonValueCodec[ListSessions] = JsonCodecMaker.make[ListSessions]
