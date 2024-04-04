@@ -13,6 +13,7 @@ object Command:
   given JsonValueCodec[Login] = JsonCodecMaker.make[Login]
 
   given JsonValueCodec[ListProperties] = JsonCodecMaker.make[ListProperties]
+  given JsonValueCodec[SaveProperty] = JsonCodecMaker.make[SaveProperty]
 
 
 sealed trait License:
