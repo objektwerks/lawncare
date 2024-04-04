@@ -25,3 +25,8 @@ CREATE TABLE session (
   note VARCHAR,
   occured VARCHAR(10) NOT NULL
 );
+
+CREATE TABLE fault (
+  cause VARCHAR NOT NULL,
+  occurred VARCHAR NOT NULL
+);
