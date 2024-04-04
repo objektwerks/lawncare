@@ -11,6 +11,7 @@ sealed trait Event
 
 object Event:
   given JsonValueCodec[Event] = JsonCodecMaker.make[Event]
+  given JsonValueCodec[Registered] = JsonCodecMaker.make[Registered]
 
 final case class Authorized(isAuthorized: Boolean) extends Event
 
