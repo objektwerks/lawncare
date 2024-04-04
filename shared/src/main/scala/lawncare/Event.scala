@@ -11,7 +11,7 @@ sealed trait Event
 
 object Event:
   given JsonValueCodec[Event] = JsonCodecMaker.make[Event]
-  
+
   given JsonValueCodec[Registered] = JsonCodecMaker.make[Registered]
   given JsonValueCodec[LoggedIn] = JsonCodecMaker.make[LoggedIn]
 
@@ -20,6 +20,7 @@ final case class Authorized(isAuthorized: Boolean) extends Event
 final case class Registered(property: Property) extends Event
 final case class LoggedIn(property: Property) extends Event
 
+final case class PropertiesListed(properties: List[Property]) extends Event
 
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
