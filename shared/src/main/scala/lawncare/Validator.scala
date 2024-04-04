@@ -1,0 +1,3 @@
+package lawncare
+
+object Validator
