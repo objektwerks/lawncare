@@ -12,5 +12,8 @@ object Validator:
   extension (login: Login)
     def isValid: Boolean = login.email.isEmail && login.pin.isPin
 
+  extension (listPropertiess: ListProperties)
+    def isValid: Boolean = listPropertiess.license.isLicense
+
   extension (addFault: AddFault)
     def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
