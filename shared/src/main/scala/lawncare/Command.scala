@@ -7,6 +7,7 @@ sealed trait Command
 
 object Command:
   given JsonValueCodec[Command] = JsonCodecMaker.make[Command]
+  given JsonValueCodec[License] = JsonCodecMaker.make[License]
 
 sealed trait License:
   val license: String
