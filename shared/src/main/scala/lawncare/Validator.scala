@@ -15,5 +15,8 @@ object Validator:
   extension (listPropertiess: ListProperties)
     def isValid: Boolean = listPropertiess.license.isLicense
 
+  extension (saveProperty: SaveProperty)
+    def isValid: Boolean = saveProperty.license.isLicense && saveProperty.property.isValid
+
   extension (addFault: AddFault)
     def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
