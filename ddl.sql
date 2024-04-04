@@ -24,5 +24,5 @@ CREATE TABLE session (
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
   note VARCHAR,
-  occured VARCHAR NOT NULL
+  occured VARCHAR(10) NOT NULL
 );
