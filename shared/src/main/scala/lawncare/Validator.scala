@@ -6,6 +6,13 @@ object Validator:
     def isPin: Boolean = value.length == 7
     def isEmail: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
 
+  extension (property: Property)
+    def isValid: Boolean =
+      property.license.isLicense &&
+      property.pin.isPin &&
+      property.email.isEmail &&
+      property.location.nonEmpty
+
   extension (register: Register)
     def isValid: Boolean = register.email.isEmail && register.location.nonEmpty
 
