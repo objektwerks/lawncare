@@ -1,6 +1,12 @@
 package lawncare
 
+import com.github.plokhotnyuk.jsoniter_scala.core.*
+import com.github.plokhotnyuk.jsoniter_scala.macros.*
+
 sealed trait Command
+
+object Command:
+  given JsonValueCodec[Command] = JsonCodecMaker.make[Command]
 
 final case class Register(email: String, location: String) extends Command
 final case class Login(email: String, pin: String) extends Command
