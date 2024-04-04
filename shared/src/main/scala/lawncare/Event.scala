@@ -12,6 +12,9 @@ sealed trait Event
 object Event:
   given JsonValueCodec[Event] = JsonCodecMaker.make[Event]
 
+final case class Authorized(isAuthorized: Boolean) extends Event
+
+
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
     val message = throwable.getMessage
