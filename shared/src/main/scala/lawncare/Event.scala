@@ -16,6 +16,7 @@ object Event:
   given JsonValueCodec[LoggedIn] = JsonCodecMaker.make[LoggedIn]
 
   given JsonValueCodec[PropertiesListed] = JsonCodecMaker.make[PropertiesListed]
+  given JsonValueCodec[PropertySaved] = JsonCodecMaker.make[PropertySaved]
 
 
 final case class Authorized(isAuthorized: Boolean) extends Event
