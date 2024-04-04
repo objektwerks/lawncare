@@ -8,7 +8,7 @@ CREATE TABLE property (
   owner VARCHAR NOT NULL,
   email VARCHAR NOT NULL,
   location VARCHAR NOT NULL,
-  joined VARCHAR NOT NULL
+  joined VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE session (
