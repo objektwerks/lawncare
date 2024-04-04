@@ -15,3 +15,4 @@ final case class Register(email: String, location: String) extends Command
 final case class Login(email: String, pin: String) extends Command
 
 final case class ListProperties(license: String) extends Command with License
+final case class SaveProperty(license: String, property: Property) extends Command with License
