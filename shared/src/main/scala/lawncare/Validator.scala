@@ -8,10 +8,17 @@ object Validator:
 
   extension (property: Property)
     def isValid: Boolean =
+      property.id >= 0 &&
       property.license.isLicense &&
       property.pin.isPin &&
       property.email.isEmail &&
-      property.location.nonEmpty
+      property.location.nonEmpty &&
+      property.joined.nonEmpty
+
+  extension (session: Session)
+    def isValid: Boolean =
+      session.id >= 0 &&
+      session.propertyId > 0
 
   extension (register: Register)
     def isValid: Boolean = register.email.isEmail && register.location.nonEmpty
