@@ -1,10 +1,16 @@
 package lawncare
 
+import com.github.plokhotnyuk.jsoniter_scala.core.*
+import com.github.plokhotnyuk.jsoniter_scala.macros.*
+
 import java.time.{Instant, LocalDate}
 
 import scalafx.beans.property.ObjectProperty
 
 sealed trait Event
+
+object Event:
+  given JsonValueCodec[Event] = JsonCodecMaker.make[Event]
 
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
