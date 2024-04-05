@@ -48,3 +48,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
     val recipients = List(email)
     val message = s"<p>This is your new pin: <b>${pin}</b> Welcome aboard!</p>"
     emailer.send(recipients, message)
+
+  private def login(email: String, pin: String): Event =
+    Try { store.login(email, pin) }.fold(
+      error => Fault("Login failed:", error),
+      optionalAccount =>
+        if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
+        else Fault(s"Login failed for email address: $emailAddress and pin: $pin")
+    )
