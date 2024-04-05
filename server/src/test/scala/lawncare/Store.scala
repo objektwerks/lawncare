@@ -49,6 +49,16 @@ final class Store(config: Config,
           true
         else false
 
+  def addAccount(account: Account): Account =
+    val id = DB localTx { implicit session =>
+      sql"""
+        insert into account(license, email, pin)
+        values(${account.license}, ${account.email}, ${account.pin})
+      """
+      .updateAndReturnGeneratedKey()
+    }
+    account.copy(id = id)
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
