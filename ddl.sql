@@ -12,7 +12,7 @@ CREATE TABLE account (
 CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
-  location VARCHAR NOT NULL,
+  location TEXT NOT NULL,
   added VARCHAR(10) NOT NULL
 );
 
