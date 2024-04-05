@@ -113,7 +113,7 @@ final class Store(config: Config,
           rs.long("property_id"),
           rs.boolean("mowed"),
           rs.boolean("edged"),
-          rs.boolean("cleaned"),
+          rs.boolean("blowed"),
           rs.boolean("trimmed"),
           rs.boolean("fertilized"),
           rs.boolean("pesticided"),
@@ -143,8 +143,8 @@ final class Store(config: Config,
 
   def addSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      insert into session(property_id, mowed, edged, cleaned, trimmed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
-      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.cleaned}, ${sess.trimmed}, ${sess.fertilized}, ${sess.pesticided},
+      insert into session(property_id, mowed, edged, blowed, trimmed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
+      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.blowed}, ${sess.trimmed}, ${sess.fertilized}, ${sess.pesticided},
       ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occured})
       """
       .updateAndReturnGeneratedKey()
@@ -152,7 +152,7 @@ final class Store(config: Config,
 
   def updateSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, cleaned = ${sess.cleaned}, trimmed = ${sess.trimmed},
+      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, blowed = ${sess.blowed}, trimmed = ${sess.trimmed},
       fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
       repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occured} where id = ${sess.id}
       """
