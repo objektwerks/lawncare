@@ -28,11 +28,11 @@ object Account:
 final case class Property(id: Long = 0,
                           accountId: Long,
                           location: String,
-                          joined: String = Entity.now()) extends Entity
+                          added: String = Entity.now()) extends Entity
 
 object Property:
   given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
-  given Ordering[Property] = Ordering.by[Property, String](property => property.joined).reverse
+  given Ordering[Property] = Ordering.by[Property, String](property => property.added).reverse
 
 final case class Session(id: Long = 0,
                          propertyId: Long,

@@ -76,6 +76,34 @@ final class Store(config: Config,
     }
     account.copy(id = id)
 
+  def listWalkers(accountId: Long): List[Walker] = DB readOnly { implicit session =>
+    sql"select * from walker where account_id = $accountId order by name"
+      .map(rs =>
+        Walker(
+          rs.long("id"),
+          rs.long("account_id"),
+          rs.string("name"), 
+        )
+      )
+      .list()
+  }
+
+  def addProperty(property: Property): Long = DB localTx { implicit session =>
+    sql"""
+      insert into property(account_id, location) values(${property.accountId}, ${property.location})
+      """
+      .updateAndReturnGeneratedKey()
+  }
+
+  def updateProperty(property: Property): Long = DB localTx { implicit session =>
+    sql"""
+      update property set location = ${property.location}
+      where id = ${prooperty.id}
+      """
+      .update()
+    property.id
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
