@@ -23,9 +23,8 @@ final class Context(config: Config):
 
   val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogAccount = config.getString("dialog.account")
-  val dialogSwimmer = config.getString("dialog.swimmer")
+  val dialogProperty = config.getString("dialog.property")
   val dialogSession = config.getString("dialog.session")
-  val dialogCharts = config.getString("dialog.charts")
   val dialogFaults = config.getString("dialog.faults")
 
   val errorServer = config.getString("error.server")
