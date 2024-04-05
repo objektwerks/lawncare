@@ -57,6 +57,12 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
+  private def listSessions(swimmerId: Long): Event =
+    Try {
+      SessionsListed( store.listSessions(swimmerId) )
+    }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
+     .get
+
   private def saveSession(session: Session): Event =
     Try {
       SessionSaved(
