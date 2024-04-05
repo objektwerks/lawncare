@@ -39,11 +39,8 @@ final class Context(config: Config):
   val labelProperties = config.getString("label.properties")
   val labelSessions = config.getString("label.sessions")
 
-  val tabWalkers = config.getString("tab.walkers")
+  val tabProperties = config.getString("tab.properties")
   val tabSessions = config.getString("tab.sessions")
-  val tabCalories = config.getString("tab.calories")
-  val tabWeight = config.getString("tab.weight")
-  val tabDistance = config.getString("tab.distance")
 
   val dateTimeSelectorEllipsis = config.getString("dateTimeSelector.ellipsis")
   val dateTimeSelectorYear = config.getString("dateTimeSelector.year")
