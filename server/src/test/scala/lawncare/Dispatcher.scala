@@ -57,6 +57,12 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
+  private def listProperties(accountId: Long): Event =
+    Try {
+      PropertiesListed(store.listProperties(accountId))
+    }.recover { case NonFatal(error) => Fault("List properties failed:", error) }
+     .get
+
   private def saveProperty(property: Property): Event =
     Try {
       PropertySaved(
