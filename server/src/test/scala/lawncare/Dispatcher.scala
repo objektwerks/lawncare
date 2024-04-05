@@ -39,12 +39,12 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def register(email: String): Event =
     Try {
       val account = Account(email = email)
-      email(account.email, account.pin)
+      send(account.email, account.pin)
       Registered( store.register(account) )
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
      .get
 
-  private def email(email: String, pin: String): Unit =
+  private def send(email: String, pin: String): Unit =
     val recipients = List(email)
     val message = s"<p>This is your new pin: <b>${pin}</b> Welcome aboard!</p>"
     emailer.send(recipients, message)
@@ -54,7 +54,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       error => Fault("Login failed:", error),
       optionalAccount =>
         if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
-        else Fault(s"Login failed for email address: $emailAddress and pin: $pin")
+        else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
   private def addFault(fault: Fault): Event =
