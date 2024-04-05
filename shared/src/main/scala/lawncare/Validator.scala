@@ -19,7 +19,7 @@ object Validator:
       property.id >= 0 &&
       property.accountId > 0 &&
       property.location.nonEmpty &&
-      property.joined.nonEmpty
+      property.added.nonEmpty
 
   extension (session: Session)
     def isValid: Boolean =
