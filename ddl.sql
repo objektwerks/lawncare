@@ -13,7 +13,7 @@ CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
   location VARCHAR NOT NULL,
-  joined VARCHAR(10) NOT NULL
+  added VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE session (
