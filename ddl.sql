@@ -33,6 +33,6 @@ CREATE TABLE session (
 );
 
 CREATE TABLE fault (
-  cause VARCHAR NOT NULL,
+  cause TEXT NOT NULL,
   occurred VARCHAR NOT NULL
 );
