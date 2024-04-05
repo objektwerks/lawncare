@@ -152,7 +152,7 @@ final class Store(config: Config,
 
   def updateSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, blowed = ${sess.blowed}, trimmed = ${sess.trimmed},
+      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, trimmed = ${sess.trimmed}, blowed = ${sess.blowed},
       fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
       repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occured} where id = ${sess.id}
       """
