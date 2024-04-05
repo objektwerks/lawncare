@@ -31,16 +31,6 @@ final class Context(config: Config):
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")
 
-  val headerName = config.getString("header.name")
-  val headerWeight = config.getString("header.weight")
-  val headerWeightUnit = config.getString("header.weightUnit")
-  val headerDistance = config.getString("header.distance")
-  val headerDistanceUnit = config.getString("header.distanceUnit")
-  val headerHours = config.getString("header.hours")
-  val headerMinutes = config.getString("header.minutes")
-  val headerCalories = config.getString("header.calories")
-  val headerDatetime = config.getString("header.datetime")
-  val headerOccurred = config.getString("header.occurred")
   val headerFault = config.getString("header.fault")
 
   val labelLicense = config.getString("label.license")
