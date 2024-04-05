@@ -10,15 +10,15 @@ Model
 Session
 -------
 >Properties:
-* mowing
-* edging ( driveway, curbing )
-* trimming ( plant, tree )
-* cleaning ( blower )
-* fertilizing ( nitrogen, phosphorus and potassium )
-* pesticiding ( herbicides, insecticides, nematicides, fungicides )
-* watering
-* repairing ( sprinkler system, pipes, heads, on/off | uncapped/capped )
-* weeding
+* mowed
+* edged ( driveway, curbing )
+* trimmed ( plant, tree )
+* blowed ( blower )
+* fertilized ( nitrogen, phosphorus and potassium )
+* pesticided ( herbicides, insecticides, nematicides, fungicides )
+* watered
+* repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
+* weeded
 
 Build
 -----
