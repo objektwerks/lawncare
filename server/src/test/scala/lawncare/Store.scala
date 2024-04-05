@@ -105,6 +105,42 @@ final class Store(config: Config,
     property.id
   }
 
+  /* 
+    mowed: Boolean = true,
+    edged: Boolean = true,
+    cleaned: Boolean = true,
+    trimmed: Boolean = false,
+    fertilized: Boolean = false,
+    pesticided: Boolean = false,
+    weeded: Boolean = false,
+    watered: Boolean = false,
+    repaired: Boolean = false,
+    note: String = "",
+    occured: String = Entity.now()
+   */
+
+  def listSessions(propertyId: Long): List[Session] = DB readOnly { implicit session =>
+    sql"select * from session where property_id = $propertyId order by occurred desc"
+      .map(rs =>
+        Session(
+          rs.long("id"),
+          rs.long("property_id"),
+          rs.boolean("mowed"),
+          rs.boolean("edged"),
+          rs.boolean("cleaned"),
+          rs.boolean("trimmed"),
+          rs.boolean("fertilized"),
+          rs.boolean("pesticided"),
+          rs.boolean("weeded"),
+          rs.boolean("watered"),
+          rs.boolean("repaired"),
+          rs.string("note"),
+          rs.string("occurred")
+        )
+      )
+      .list()
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
