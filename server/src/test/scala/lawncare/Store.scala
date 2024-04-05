@@ -34,6 +34,20 @@ final class Store(config: Config,
 
   def register(account: Account): Account = addAccount(account)
 
+  def login(email: String, pin: String): Option[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account where email_address = $email and pin = $pin"
+        .map(rs =>
+          Account(
+            rs.long("id"),
+            rs.string("license"),
+            rs.string("email"),
+            rs.string("pin"),
+            rs.string("activated")
+          )
+        )
+        .single()
+    }
 
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
@@ -55,8 +69,8 @@ final class Store(config: Config,
   def addAccount(account: Account): Account =
     val id = DB localTx { implicit session =>
       sql"""
-        insert into account(license, email, pin)
-        values(${account.license}, ${account.email}, ${account.pin})
+        insert into account(license, email, pin, activated)
+        values(${account.license}, ${account.email}, ${account.pin}, ${account.activated})
       """
       .updateAndReturnGeneratedKey()
     }
