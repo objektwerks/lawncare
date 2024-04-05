@@ -20,6 +20,10 @@ final case class Account(id: Long = 0,
                          email: String = "",
                          pin: String = Pin.newInstance) extends Entity
 
+object Account:
+  val empty = Account(license = "", email = "", pin = "")
+  given JsonValueCodec[Account] = JsonCodecMaker.make[Account]
+
 final case class Property(id: Long = 0,
                           license: String = Pin.newInstance,
                           pin: String = Pin.newInstance,
