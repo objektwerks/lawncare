@@ -150,6 +150,16 @@ final class Store(config: Config,
       .updateAndReturnGeneratedKey()
   }
 
+  def updateSession(sess: Session): Long = DB localTx { implicit session =>
+    sql"""
+      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, cleaned = ${sess.cleaned}, trimmed = ${sess.trimmed},
+      fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
+      repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occured} where id = ${sess.id}
+      """
+      .update()
+    sess.id
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
