@@ -42,7 +42,8 @@ object Validator:
 
   extension (listPropertiess: ListProperties)
     def isValid: Boolean =
-      listPropertiess.license.isLicense
+      listPropertiess.license.isLicense &&
+      listPropertiess.accountId > 0
 
   extension (saveProperty: SaveProperty)
     def isValid: Boolean =
