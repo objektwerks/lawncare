@@ -143,8 +143,8 @@ final class Store(config: Config,
 
   def addSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
-      insert into session(property_id, mowed, edged, blowed, trimmed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
-      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.blowed}, ${sess.trimmed}, ${sess.fertilized}, ${sess.pesticided},
+      insert into session(property_id, mowed, edged, trimmed, blowed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
+      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.trimmed}, ${sess.blowed}, ${sess.fertilized}, ${sess.pesticided},
       ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occured})
       """
       .updateAndReturnGeneratedKey()
