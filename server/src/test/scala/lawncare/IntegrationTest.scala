@@ -9,7 +9,7 @@ import scala.concurrent.duration.*
 import scala.sys.process.Process
 
 final class IntegrationTest extends AnyFunSuite with Matchers:
-  val exitCode = Process("psql -d walker -f ddl.sql").run().exitValue()
+  val exitCode = Process("psql -d lawncare -f ddl.sql").run().exitValue()
   exitCode shouldBe 0
 
   val config = ConfigFactory.load("test.conf")
