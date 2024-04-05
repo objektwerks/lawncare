@@ -26,7 +26,7 @@ object Event:
 final case class Authorized(isAuthorized: Boolean) extends Event
 
 final case class Registered(account: Account) extends Event
-final case class LoggedIn(property: Property) extends Event
+final case class LoggedIn(account: Account) extends Event
 
 final case class PropertiesListed(properties: List[Property]) extends Event
 final case class PropertySaved(id: Long) extends Event
