@@ -16,9 +16,10 @@ Session
 * blowed ( blower )
 * fertilized ( nitrogen, phosphorus and potassium )
 * pesticided ( herbicides, insecticides, nematicides, fungicides )
+* weeded
 * watered
 * repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
-* weeded
+* note
 
 Build
 -----
