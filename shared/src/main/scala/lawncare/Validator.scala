@@ -12,14 +12,12 @@ object Validator:
       account.license.isLicense &&
       account.email.isEmail &&
       account.pin.isPin &&
-      account.activated > 0
+      account.activated.nonEmpty
 
   extension (property: Property)
     def isValid: Boolean =
       property.id >= 0 &&
-      property.license.isLicense &&
-      property.pin.isPin &&
-      property.email.isEmail &&
+      property.accountId > 0 &&
       property.location.nonEmpty &&
       property.joined.nonEmpty
 
@@ -35,8 +33,7 @@ object Validator:
 
   extension (register: Register)
     def isValid: Boolean =
-      register.email.isEmail &&
-      register.location.nonEmpty
+      register.email.isEmail
 
   extension (login: Login)
     def isValid: Boolean =
@@ -70,7 +67,7 @@ object Validator:
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register(_, _)          => register.isValid
+        case register @ Register(_)             => register.isValid
         case login @ Login(_, _)                => login.isValid
         case listProperties @ ListProperties(_) => listProperties.isValid
         case saveProperty @ SaveProperty(_, _)  => saveProperty.isValid
