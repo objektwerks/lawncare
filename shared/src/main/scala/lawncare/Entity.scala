@@ -25,9 +25,7 @@ object Account:
   given JsonValueCodec[Account] = JsonCodecMaker.make[Account]
 
 final case class Property(id: Long = 0,
-                          license: String = Pin.newInstance,
-                          pin: String = Pin.newInstance,
-                          email: String = "",
+                          accountId: Long,
                           location: String,
                           joined: String = Entity.now()) extends Entity
 
