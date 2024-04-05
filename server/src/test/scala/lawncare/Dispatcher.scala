@@ -57,6 +57,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
+  private def saveSession(session: Session): Event =
+    Try {
+      SessionSaved(
+        if session.id == 0 then store.addSession(session)
+        else store.updateSession(session)
+      )
+    }.recover { case NonFatal(error) => Fault("Save cleaning failed:", error) }
+     .get
+
   private def addFault(fault: Fault): Event =
     Try {
       store.addFault(fault)
