@@ -48,3 +48,22 @@ final class Store(config: Config,
           logger.debug(s"*** store cache put: $license")
           true
         else false
+
+  def listFaults(): List[Fault] = DB readOnly { implicit session =>
+    sql"select * from fault order by occurred desc"
+      .map(rs =>
+        Fault(
+          rs.string("cause"),
+          rs.string("occurred")
+        )
+      )
+      .list()
+  }
+
+  def addFault(fault: Fault): Fault = DB localTx { implicit session =>
+    sql"""
+      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+      """
+      .update()
+      fault
+  }
