@@ -105,20 +105,6 @@ final class Store(config: Config,
     property.id
   }
 
-  /* 
-    mowed: Boolean = true,
-    edged: Boolean = true,
-    cleaned: Boolean = true,
-    trimmed: Boolean = false,
-    fertilized: Boolean = false,
-    pesticided: Boolean = false,
-    weeded: Boolean = false,
-    watered: Boolean = false,
-    repaired: Boolean = false,
-    note: String = "",
-    occured: String = Entity.now()
-   */
-
   def listSessions(propertyId: Long): List[Session] = DB readOnly { implicit session =>
     sql"select * from session where property_id = $propertyId order by occurred desc"
       .map(rs =>
@@ -139,6 +125,29 @@ final class Store(config: Config,
         )
       )
       .list()
+  }
+
+  /* 
+    mowed: Boolean = true,
+    edged: Boolean = true,
+    cleaned: Boolean = true,
+    trimmed: Boolean = false,
+    fertilized: Boolean = false,
+    pesticided: Boolean = false,
+    weeded: Boolean = false,
+    watered: Boolean = false,
+    repaired: Boolean = false,
+    note: String = "",
+    occured: String = Entity.now()
+   */
+
+  def addSession(sess: Session): Long = DB localTx { implicit session =>
+    sql"""
+      insert into session(property_id, mowed, edged, cleaned, trimmed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
+      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.cleaned}, ${sess.trimmed}, ${sess.fertilized}, ${sess.pesticided},
+      ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occured})
+      """
+      .updateAndReturnGeneratedKey()
   }
 
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
