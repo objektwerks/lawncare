@@ -57,6 +57,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
+  private def saveProperty(property: Property): Event =
+    Try {
+      PropertySaved(
+        if property.id == 0 then store.addProperty(property)
+        else store.updateProperty(property)
+      )
+    }.recover { case NonFatal(error) => Fault("Save property failed:", error) }
+     .get
+
   private def listSessions(swimmerId: Long): Event =
     Try {
       SessionsListed( store.listSessions(swimmerId) )
