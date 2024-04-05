@@ -21,11 +21,6 @@ final class Context(config: Config):
   val buttonLogin = config.getString("button.login")
   val buttonAccount = config.getString("button.account")
 
-  val chartMin = config.getString("chart.min")
-  val chartMax = config.getString("chart.max")
-  val chartAvg = config.getString("chart.avg")
-  val chartMonthDay = config.getString("chart.monthDay")
-
   val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogAccount = config.getString("dialog.account")
   val dialogSwimmer = config.getString("dialog.swimmer")
