@@ -16,13 +16,10 @@ final class Context(config: Config):
   val buttonAdd = config.getString("button.add")
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
-  val buttonChart = config.getString("button.chart")
   val buttonFaults = config.getString("button.faults")
   val buttonRegister = config.getString("button.register")
   val buttonLogin = config.getString("button.login")
   val buttonAccount = config.getString("button.account")
-  val buttonActivate = config.getString("button.activate")
-  val buttonDeactivate = config.getString("button.deactivate")
 
   val chartMin = config.getString("chart.min")
   val chartMax = config.getString("chart.max")
