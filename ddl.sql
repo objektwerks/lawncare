@@ -28,7 +28,7 @@ CREATE TABLE session (
   weeded BOOLEAN NOT NULL,
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
-  note VARCHAR,
+  note TEXT,
   occured VARCHAR(10) NOT NULL
 );
 
