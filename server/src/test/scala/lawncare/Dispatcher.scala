@@ -17,7 +17,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     val event = command match
       case Register(emailAddress)       => register(emailAddress)
       case Login(emailAddress, pin)     => login(emailAddress, pin)
-      case ListProperties(_, accountId) => listWalkers(accountId)
+      case ListProperties(_, accountId) => listProperties(accountId)
       case SaveProperty(_, property)    => saveProperty(property)
       case ListSessions(_, walkerId)    => listSessions(walkerId)
       case SaveSession(_, session)      => saveSession(session)
@@ -41,7 +41,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       val account = Account(email = email)
       email(account.email, account.pin)
       Registered( store.register(account) )
-    }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
+    }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
      .get
 
   private def email(email: String, pin: String): Unit =
@@ -56,3 +56,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
         else Fault(s"Login failed for email address: $emailAddress and pin: $pin")
     )
+
+  private def addFault(fault: Fault): Event =
+    Try {
+      store.addFault(fault)
+      FaultAdded()
+    }.recover { case NonFatal(error) => Fault("Add fault failed:", error) }
+     .get
