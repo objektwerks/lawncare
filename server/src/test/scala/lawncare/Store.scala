@@ -32,6 +32,9 @@ final class Store(config: Config,
   }
   ConnectionPool.singleton(new DataSourceConnectionPool(dataSource))
 
+  def register(account: Account): Account = addAccount(account)
+
+
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
       case Some(_) =>
