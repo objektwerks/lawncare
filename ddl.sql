@@ -21,7 +21,7 @@ CREATE TABLE session (
   property_id BIGINT REFERENCES property(id),
   mowed BOOLEAN NOT NULL,
   edged BOOLEAN NOT NULL,
-  cleaned BOOLEAN NOT NULL,
+  blowed BOOLEAN NOT NULL,
   trimmed BOOLEAN NOT NULL,
   fertilized BOOLEAN NOT NULL,
   pesticided BOOLEAN NOT NULL,
