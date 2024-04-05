@@ -21,7 +21,7 @@ object Command:
 sealed trait License:
   val license: String
 
-final case class Register(email: String, location: String) extends Command
+final case class Register(email: String) extends Command
 final case class Login(email: String, pin: String) extends Command
 
 final case class ListProperties(license: String) extends Command with License
