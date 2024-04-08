@@ -12,7 +12,7 @@ CREATE TABLE account (
 CREATE TABLE property (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
-  location TEXT NOT NULL,
+  location VARCHAR NOT NULL,
   added VARCHAR(10) NOT NULL
 );
 
@@ -28,11 +28,11 @@ CREATE TABLE session (
   weeded BOOLEAN NOT NULL,
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
-  note TEXT,
+  note VARCHAR,
   occured VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE fault (
-  cause TEXT NOT NULL,
+  cause VARCHAR NOT NULL,
   occurred VARCHAR NOT NULL
 );
