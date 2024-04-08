@@ -28,6 +28,8 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     register
     login
 
+    addProperty
+
     fault
 
   def register: Unit =
