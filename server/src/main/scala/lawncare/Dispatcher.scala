@@ -46,7 +46,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def send(email: String, pin: String): Unit =
     val recipients = List(email)
-    val message = s"<p>This is your new pin: <b>${pin}</b> Welcome aboard!</p>"
+    val message = s"<p><b>Account Registration:</b> Your new pin is: <b>${pin}</b> Welcome aboard!</p>"
     emailer.send(recipients, message)
 
   private def login(email: String, pin: String): Event =
