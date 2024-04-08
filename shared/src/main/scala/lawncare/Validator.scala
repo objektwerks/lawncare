@@ -7,7 +7,7 @@ object Validator:
     def isEmail: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
 
   extension (account: Account)
-    def isActivated: Boolean =
+    def isValid: Boolean =
       account.id >= 0 &&
       account.license.isLicense &&
       account.email.isEmail &&
