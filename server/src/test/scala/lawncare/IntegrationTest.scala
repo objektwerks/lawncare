@@ -33,6 +33,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     listProperties
 
     addSession
+    updateSession
 
     fault
 
