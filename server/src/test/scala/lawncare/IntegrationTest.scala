@@ -23,7 +23,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   var testSession = Session(propertyId = 0)
 
   test("integration"):
-    true // TODO!
+    fault
 
   def fault: Unit =
     val fault = Fault("error message")
