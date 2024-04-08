@@ -25,6 +25,8 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   var testSession = Session(propertyId = 0)
 
   test("integration"):
+    register
+    
     fault
 
   def register: Unit =
