@@ -30,6 +30,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
 
     addProperty
     updateProperty
+    listProperties
 
     fault
 
