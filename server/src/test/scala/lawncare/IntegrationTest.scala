@@ -21,7 +21,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   var testAccount = Account()
-  var testProperty = Property(accountId = 0, location = "")
+  var testProperty = Property(accountId = 0, location = "a")
   var testSession = Session(propertyId = 0)
 
   test("integration"):
@@ -43,6 +43,16 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(login) match
       case LoggedIn(account) => account shouldBe testAccount
       case fault => fail(s"Invalid loggedin event: $fault")
+
+  def addProperty: Unit =
+    testProperty = testProperty.copy(accountId = testAccount.id, location = testProperty.location)
+    val saveProperty = SaveProperty(testAccount.license, testProperty)
+    dispatcher.dispatch(saveProperty) match
+      case PropertySaved(id) =>
+        id should not be 0
+        testProperty = testProperty.copy(id = id)
+        testSession = testSession.copy(propertyId = id)
+      case fault => fail(s"Invalid property saved event: $fault")
 
   def fault: Unit =
     val fault = Fault("error message")
