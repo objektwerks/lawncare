@@ -29,6 +29,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     login
 
     addProperty
+    updateProperty
 
     fault
 
