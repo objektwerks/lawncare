@@ -61,6 +61,14 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
       case PropertySaved(id) => id shouldBe testProperty.id
       case fault => fail(s"Invalid property saved event: $fault")
 
+  def listProperties: Unit =
+    val listProperties = ListProperties(testAccount.license, testProperty.accountId)
+    dispatcher.dispatch(listProperties) match
+      case PropertiesListed(properties) =>
+        properties.length shouldBe 1
+        properties.head shouldBe testProperty
+      case fault => fail(s"Invalid properties listed event: $fault")
+
   def fault: Unit =
     val fault = Fault("error message")
     store.addFault(fault)
