@@ -69,6 +69,14 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
         properties.head shouldBe testProperty
       case fault => fail(s"Invalid properties listed event: $fault")
 
+  def addSession: Unit =
+    val saveSession = SaveSession(testAccount.license, testSession)
+    dispatcher.dispatch(saveSession) match
+      case SessionSaved(id) =>
+        id should not be 0
+        testSession = testSession.copy(id = id)
+      case fault => fail(s"Invalid session saved event: $fault")
+
   def fault: Unit =
     val fault = Fault("error message")
     store.addFault(fault)
