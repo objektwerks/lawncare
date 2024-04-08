@@ -34,6 +34,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
 
     addSession
     updateSession
+    listSessions
 
     fault
 
