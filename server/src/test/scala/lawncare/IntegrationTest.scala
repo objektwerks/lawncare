@@ -32,6 +32,8 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
     updateProperty
     listProperties
 
+    addSession
+
     fault
 
   def register: Unit =
