@@ -24,10 +24,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   val objectAccount = ObjectProperty[Account](Account.empty)
-  val observableWalkers = ObservableBuffer[Walker]()
+  val observableProperties = ObservableBuffer[Property]()
   val observableSessions = ObservableBuffer[Session]()
   val observableFaults = ObservableBuffer[Fault]()
 
   objectAccount.onChange { (_, oldAccount, newAccount) =>
     logger.info("*** object account onchange event: {} -> {}", oldAccount, newAccount)
+  }
+
+  observableProperties.onChange { (_, changes) =>
+    logger.info("*** observable properties onchange event: {}", changes)
   }
