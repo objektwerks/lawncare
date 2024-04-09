@@ -38,6 +38,7 @@ final class Context(config: Config):
   val labelEmail = config.getString("label.email")
   val labelPin = config.getString("label.pin")
   val labelLocation = config.getString("label.location")
+  val labelNote = config.getString("label.note")
   val labelProperties = config.getString("label.properties")
   val labelSessions = config.getString("label.sessions")
 
