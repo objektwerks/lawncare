@@ -70,3 +70,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
+  def login(login: Login): Unit =
+    fetcher.fetch(
+      login,
+      (event: Event) => event match
+        case fault @ Fault(_, _) => loggedin.set(false)
+        case LoggedIn(account) =>
+          objectAccount.set(account)
+          swimmers()
+        case _ => ()
+    )
+
