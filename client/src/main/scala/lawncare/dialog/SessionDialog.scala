@@ -7,20 +7,6 @@ import scalafx.scene.layout.Region
 
 import lawncare.{Client, Context, Session}
 
-/* 
-  mowed: Boolean = true,
-  edged: Boolean = true,
-  trimmed: Boolean = false,
-  blowed: Boolean = true,
-  fertilized: Boolean = false,
-  pesticided: Boolean = false,
-  weeded: Boolean = false,
-  watered: Boolean = false,
-  repaired: Boolean = false,
-  note: String = "",
-  occurred: String
- */
-
 final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
   initOwner(Client.stage)
   title = context.windowTitle
@@ -55,6 +41,9 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
 
   val noteTextField = new TextField:
     text = session.note
+
+  val occurredTextField = new TextField:
+    text = session.occurred
 
   val controls = List[(String, Region)](
     context.labelMowed -> mowedCheckBox,
