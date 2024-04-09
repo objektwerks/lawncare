@@ -32,6 +32,7 @@ final class Context(config: Config):
   val errorLogin = config.getString("error.login")
 
   val headerFault = config.getString("header.fault")
+  val headerOccurred = config.getString("header.occurred")
 
   val labelLicense = config.getString("label.license")
   val labelEmail = config.getString("label.email")
