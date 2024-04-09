@@ -39,3 +39,25 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   observableSessions.onChange { (_, changes) =>
     logger.info("*** observable sessions onchange event: {}", changes)
   }
+
+  def onFetchFault(source: String, fault: Fault): Unit =
+    val cause = s"$source - $fault"
+    logger.error("*** cause: {}", cause)
+    observableFaults += fault.copy(cause = cause)
+
+  def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
+    val cause = s"$source - $entity - $fault"
+    logger.error("*** cause: {}", cause)
+    observableFaults += fault.copy(cause = cause)
+
+  def add(fault: Fault): Unit =
+    fetcher.fetch(
+      AddFault(objectAccount.get.license, fault),
+      (event: Event) => event match
+        case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
+        case FaultAdded() =>
+          observableFaults += fault
+          observableFaults.sort()
+        case _ => ()
+    )
+
