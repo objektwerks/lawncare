@@ -29,6 +29,9 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   val mowedCheckBox = new CheckBox:
     selected = session.mowed
 
+  val edgedCheckBox = new CheckBox:
+    selected = session.edged
+
   val noteTextField = new TextField:
     text = session.note
 
