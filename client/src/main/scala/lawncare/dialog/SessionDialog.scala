@@ -50,6 +50,9 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   val wateredCheckBox = new CheckBox:
     selected = session.watered
 
+  val repairedCheckBox = new CheckBox:
+    selected = session.repaired
+
   val noteTextField = new TextField:
     text = session.note
 
