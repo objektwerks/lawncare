@@ -58,6 +58,7 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
     if dialogButton == saveButtonType then
       session.copy(
         mowed = mowedCheckBox.selected.value,
-        note = noteTextField.text.toString
+        note = noteTextField.text.toString,
+        occurred = occurredTextField.text.toString
       )
     else null
