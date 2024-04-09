@@ -36,7 +36,7 @@ final class Store(config: Config,
 
   def login(email: String, pin: String): Option[Account] =
     DB readOnly { implicit session =>
-      sql"select * from account where email_address = $email and pin = $pin"
+      sql"select * from account where email = $email and pin = $pin"
         .map(rs =>
           Account(
             rs.long("id"),
