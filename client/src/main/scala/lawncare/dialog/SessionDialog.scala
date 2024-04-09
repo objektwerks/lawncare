@@ -2,52 +2,22 @@ package lawncare.dialog
 
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
-import scalafx.scene.control.{ButtonType, Dialog}
+import scalafx.scene.control.{ButtonType, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import lawncare.{Client, Context, Session}
+import lawncare.{Client, Context, Entity, Session}
 
 final class SessionDialog(context: Context, session: Session) extends Dialog[Session]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogSession
 
-  val weightTextField = new IntTextField:
-    text = session.weight.toString
-  
-  val weightUnitComboBox = new ComboBox[String]:
-  	items = ObservableBuffer.from( WeightUnit.toList )
-  	value = session.weightUnit.toString
-  weightUnitComboBox.prefWidth = 200
-
-  val distanceTextField = new DoubleTextField:
-    text = session.distance.toString
-
-  val distanceUnitComboBox = new ComboBox[String]:
-  	items = ObservableBuffer.from( DistanceUnit.toList )
-  	value = session.distanceUnit.toString
-  distanceUnitComboBox.prefWidth = 150
-
-  val hoursTextField = new IntTextField:
-    text = session.hours.toString
-
-  val minutesTextField = new IntTextField:
-    text = session.minutes.toString
-
-  val caloriesTextField = CalorieTextField(session)
-
-  val datetimeSelector = DateTimeField( context, Entity.toLocalDateTime(session.datetime) )
+  val noteTextField = new TextField:
+    text = session.note
 
   val controls = List[(String, Region)](
-    context.labelWeightUnit   -> weightTextField,
-    context.labelWeightUnit   -> weightUnitComboBox,
-    context.labelDistance     -> distanceTextField,
-    context.labelDistanceUnit -> distanceUnitComboBox,
-    context.labelHours        -> hoursTextField,
-    context.labelMinutes      -> minutesTextField,
-    context.labelCalories     -> caloriesTextField,
-    context.labelDatetime     -> datetimeSelector
+    context.labelNote   -> noteTextField
   )
   dialogPane().content = ControlGridPane(controls)
 
@@ -57,13 +27,6 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   resultConverter = dialogButton =>
     if dialogButton == saveButtonType then
       session.copy(
-        weight = weightTextField.int(session.weight),
-        weightUnit = weightUnitComboBox.value.value,
-        distance = distanceTextField.double(session.distance),
-        distanceUnit = distanceUnitComboBox.value.value,
-        hours = hoursTextField.int(session.hours),
-        minutes = minutesTextField.int(session.minutes),
-        calories = caloriesTextField.int(session.calories),
-        datetime = Entity.toEpochMillis(datetimeSelector.value.value)
+        note = noteTextField.text.toString
       )
     else null
