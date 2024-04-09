@@ -19,7 +19,7 @@ Session
 * weeded ( plant beds )e
 * watered ( sprinkler system, sprinkler heads and pipes )
 * repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
-* note
+* note ( anyting pertaining to a yard session )
 
 Location
 --------
