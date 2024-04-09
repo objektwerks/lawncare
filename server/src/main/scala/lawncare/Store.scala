@@ -131,7 +131,7 @@ final class Store(config: Config,
     sql"""
       insert into session(property_id, mowed, edged, trimmed, blowed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
       values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.trimmed}, ${sess.blowed}, ${sess.fertilized}, ${sess.pesticided},
-      ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occured})
+      ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occurred})
       """
       .updateAndReturnGeneratedKey()
   }
@@ -140,7 +140,7 @@ final class Store(config: Config,
     sql"""
       update session set mowed = ${sess.mowed}, edged = ${sess.edged}, trimmed = ${sess.trimmed}, blowed = ${sess.blowed},
       fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
-      repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occured} where id = ${sess.id}
+      repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occurred} where id = ${sess.id}
       """
       .update()
     sess.id
