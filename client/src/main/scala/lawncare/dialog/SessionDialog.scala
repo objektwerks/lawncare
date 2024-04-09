@@ -16,7 +16,7 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
     text = session.note
 
   val controls = List[(String, Region)](
-    context.labelNote   -> noteTextField
+    context.labelNote -> noteTextField
   )
   dialogPane().content = ControlGridPane(controls)
 
