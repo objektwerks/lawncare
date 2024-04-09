@@ -29,7 +29,7 @@ CREATE TABLE session (
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
   note VARCHAR,
-  occured VARCHAR(10) NOT NULL
+  occurred VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE fault (
