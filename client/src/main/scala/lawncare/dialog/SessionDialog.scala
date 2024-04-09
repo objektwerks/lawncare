@@ -1,7 +1,7 @@
 package lawncare.dialog
 
 import scalafx.Includes.*
-import scalafx.scene.control.{ButtonType, Dialog, TextField}
+import scalafx.scene.control.{ButtonType, CheckBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
@@ -12,10 +12,14 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   title = context.windowTitle
   headerText = context.dialogSession
 
+  val mowedCheckBox = new CheckBox:
+    selected = session.mowed
+
   val noteTextField = new TextField:
     text = session.note
 
   val controls = List[(String, Region)](
+    context.labelMowed -> mowedCheckBox,
     context.labelNote -> noteTextField
   )
   dialogPane().content = ControlGridPane(controls)
@@ -26,6 +30,7 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   resultConverter = dialogButton =>
     if dialogButton == saveButtonType then
       session.copy(
+        mowed = mowedCheckBox.selected.value,
         note = noteTextField.text.toString
       )
     else null
