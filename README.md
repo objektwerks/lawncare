@@ -10,7 +10,7 @@ Model
 Session
 -------
 >Properties:
-* mowed
+* mowed ( yard )
 * edged ( driveway, curbing )
 * trimmed ( plant, tree )
 * blowed ( blower, driveway, plant beds )
