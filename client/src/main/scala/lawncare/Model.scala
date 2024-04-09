@@ -91,3 +91,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableProperties ++= properties
         case _ => ()
     )
+
+  def add(selectedIndex: Int, property: Property)(runLast: => Unit): Unit =
+    fetcher.fetch(
+      SaveProperty(objectAccount.get.license, property),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchFault("Model.save property", property, fault)
+        case PropertySaved(id) =>
+          observableProperties += property.copy(id = id)
+          observableProperties.sort()
+          selectedPropertyId.set(id)
+          runLast
+        case _ => ()
+    )
