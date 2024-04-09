@@ -71,11 +71,11 @@ lazy val lawncare = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "walker-mac-0.1.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "walker-m1-0.1.jar"
-  else if (OS == "win") assemblyJarName := "walker-win-0.1.jar"
-  else if (OS == "linux") assemblyJarName := "walker-linux-0.1.jar"
-  else assemblyJarName := "walker-no-valid-target-specified-0.1.jar"
+  if (OS == "mac") assemblyJarName := "lawncare-mac-0.2.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "lawncare-m1-0.2.jar"
+  else if (OS == "win") assemblyJarName := "lawncare-win-0.2.jar"
+  else if (OS == "linux") assemblyJarName := "lawncare-linux-0.2.jar"
+  else assemblyJarName := "lawncare-no-valid-target-specified-0.2.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
