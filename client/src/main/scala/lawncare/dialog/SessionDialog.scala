@@ -44,6 +44,9 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
   val pesticidedCheckBox = new CheckBox:
     selected = session.pesticided
 
+  val weededCheckBox = new CheckBox:
+    selected = session.weeded
+
   val noteTextField = new TextField:
     text = session.note
 
