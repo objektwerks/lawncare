@@ -115,3 +115,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           runLast
         case _ => ()
     )
+
+  def sessions(propertyId: Long): Unit =
+    fetcher.fetch(
+      ListSessions(objectAccount.get.license, propertyId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchFault("Model.sessions", fault)
+        case SessionsListed(sessions) =>
+          observableSessions.clear()
+          observableSessions ++= sessions
+        case _ => ()
+    )
