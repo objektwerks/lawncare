@@ -5,6 +5,8 @@ import scalafx.scene.Scene
 import scalafx.scene.layout.VBox
 
 final class View(context: Context, model: Model):
+  println(model) // TODO!
+
   val vbox = new VBox:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
