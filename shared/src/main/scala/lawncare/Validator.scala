@@ -25,7 +25,7 @@ object Validator:
     def isValid: Boolean =
       session.id >= 0 &&
       session.propertyId > 0 &&
-      session.occured.nonEmpty
+      session.occurred.nonEmpty
 
   extension  (license: License)
     def isLicense: Boolean =

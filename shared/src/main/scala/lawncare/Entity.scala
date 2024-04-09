@@ -46,8 +46,8 @@ final case class Session(id: Long = 0,
                          watered: Boolean = false,
                          repaired: Boolean = false,
                          note: String = "",
-                         occured: String = Entity.now()) extends Entity
+                         occurred: String = Entity.now()) extends Entity
 
 object Session:
   given JsonValueCodec[Session] = JsonCodecMaker.make[Session]
-  given Ordering[Session] = Ordering.by[Session, String](session => session.occured).reverse
+  given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
