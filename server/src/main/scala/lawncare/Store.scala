@@ -127,20 +127,6 @@ final class Store(config: Config,
       .list()
   }
 
-  /* 
-    mowed: Boolean = true,
-    edged: Boolean = true,
-    cleaned: Boolean = true,
-    trimmed: Boolean = false,
-    fertilized: Boolean = false,
-    pesticided: Boolean = false,
-    weeded: Boolean = false,
-    watered: Boolean = false,
-    repaired: Boolean = false,
-    note: String = "",
-    occured: String = Entity.now()
-   */
-
   def addSession(sess: Session): Long = DB localTx { implicit session =>
     sql"""
       insert into session(property_id, mowed, edged, trimmed, blowed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
