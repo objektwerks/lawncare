@@ -63,6 +63,8 @@ final class SessionDialog(context: Context, session: Session) extends Dialog[Ses
         blowed = blowedCheckBox.selected.value,
         fertilized = fertilizedCheckBox.selected.value,
         pesticided = pesticidedCheckBox.selected.value,
+        weeded = weededCheckBox.selected.value,
+        watered = wateredCheckBox.selected.value,
 
         note = noteTextField.text.toString,
         occurred = occurredTextField.text.toString
