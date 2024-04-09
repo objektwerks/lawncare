@@ -5,6 +5,8 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scalafx.application.JFXApp3
 
+import lawncare.dialog.{Alerts}
+
 object Client extends JFXApp3 with LazyLogging:
   val conf = ConfigFactory.load("client.conf")
   val context = Context(conf)
