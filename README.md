@@ -17,7 +17,7 @@ Session
 * fertilized ( nitrogen, phosphorus and potassium )
 * pesticided ( herbicides, insecticides, nematicides, fungicides )
 * weeded
-* watered
+* watered ( sprinkler system, sprinkler heads and pipes )
 * repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 * note
 
