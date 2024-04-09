@@ -22,3 +22,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     shouldBeInFxThread("*** selected property id onchange should be in fx thread.")
     sessions(newPropertyId)
   }
+
+  val objectAccount = ObjectProperty[Account](Account.empty)
+  val observableWalkers = ObservableBuffer[Walker]()
+  val observableSessions = ObservableBuffer[Session]()
+  val observableFaults = ObservableBuffer[Fault]()
