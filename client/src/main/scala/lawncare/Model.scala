@@ -77,7 +77,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case fault @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) =>
           objectAccount.set(account)
-          swimmers()
+          properties()
         case _ => ()
     )
 
+  def properties(): Unit =
+    fetcher.fetch(
+      ListProperties(objectAccount.get.license, objectAccount.get.id),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchFault("Model.properties", fault)
+        case PropertiesListed(properties) =>
+          observableProperties.clear()
+          observableProperties ++= properties
+        case _ => ()
+    )
