@@ -91,7 +91,7 @@ final class Store(config: Config,
 
   def addProperty(property: Property): Long = DB localTx { implicit session =>
     sql"""
-      insert into property(account_id, location) values(${property.accountId}, ${property.location}, ${property.added})
+      insert into property(account_id, location, added) values(${property.accountId}, ${property.location}, ${property.added})
       """
       .updateAndReturnGeneratedKey()
   }
