@@ -24,7 +24,11 @@ Session
 Location
 --------
 >The Property.location property can contain the following:
-1.[Address to Lat/Lon Converter](https://www.latlong.net/convert-address-to-lat-long.html)
+1. [Address to Lat/Lon Converter](https://www.latlong.net/convert-address-to-lat-long.html)
+2. [Google Maps](https://support.google.com/maps/answer/18539?hl=en&co=GENIE.Platform=Android)
+3. Short Address
+4. Long Address
+5. Or your special encoded address. :)
 
 Build
 -----
