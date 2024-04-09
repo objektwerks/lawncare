@@ -13,7 +13,7 @@ Session
 * mowed
 * edged ( driveway, curbing )
 * trimmed ( plant, tree )
-* blowed ( blower )
+* blowed ( blower, driveway, plant beds )
 * fertilized ( nitrogen, phosphorus and potassium )
 * pesticided ( herbicides, insecticides, nematicides, fungicides )
 * weeded
