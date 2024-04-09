@@ -21,6 +21,11 @@ Session
 * repaired ( sprinkler system, pipes, heads, on/off | uncapped/capped )
 * note
 
+Location
+--------
+>The Property.location property can contain the following:
+1.[Address to Lat/Lon Converter](https://www.latlong.net/convert-address-to-lat-long.html)
+
 Build
 -----
 1. sbt clean compile
