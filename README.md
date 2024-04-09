@@ -63,10 +63,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/lawncare-mac-0.1.jar
-2. java -jar .assembly/lawncare-m1-0.1.jar
-3. java -jar .assembly/lawncare-win-0.1.jar
-4. java -jar .assembly/lawncare-linux-0.1.jar
+1. java -jar .assembly/lawncare-mac-0.2.jar
+2. java -jar .assembly/lawncare-m1-0.2.jar
+3. java -jar .assembly/lawncare-win-0.2.jar
+4. java -jar .assembly/lawncare-linux-0.2.jar
 
 Deploy
 ------
