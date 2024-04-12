@@ -1,10 +1,12 @@
 package lawncare.pane
 
+import scalafx.Includes.*
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Button, Tab, TabPane, TableColumn, TableView}
+import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import lawncare.{Context, Model, Property}
+import lawncare.dialog.{AccountDialog, FaultsDialog, PropertyDialog}
 
 final class PropertiesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -62,3 +64,41 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
   children = List(tabPane)
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
+
+  model.observableFaults.onChange { (_, _) =>
+    faultsButton.disable = false
+  }
+
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+  
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedPropertyId.value = selectedItem.id
+      editButton.disable = false
+  }
+
+  def add(): Unit =
+    PropertyDialog(context, Property(accountId = model.objectAccount.get.id, location = "")).showAndWait() match
+      case Some(property: Property) => model.add(0, property) {
+        tableView.selectionModel().select(property.copy(id = model.selectedPropertyId.value))
+      }
+      case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val property = tableView.selectionModel().getSelectedItem.property
+    PropertyDialog(context, property).showAndWait() match
+      case Some(property: Property) => model.update(selectedIndex, property) {
+        tableView.selectionModel().select(selectedIndex)
+      }
+      case _ =>
+
+  def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait()
+
+  def faults(): Unit = FaultsDialog(context, model).showAndWait() match
+    case _ => faultsButton.disable = model.observableFaults.isEmpty
