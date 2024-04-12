@@ -1,7 +1,8 @@
 package lawncare.pane
 
+import scalafx.Includes.*
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Button, Tab, TabPane, TableColumn, TableView}
+import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import lawncare.{Context, Model, Session}
@@ -102,6 +103,23 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
   children = List(tabPane)
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
+
+  model.selectedSessionId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
+
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
+  tableView.selectionModel().selectionModeProperty().value = SelectionMode.Single
+
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedSessionId.value = selectedItem.id
+      editButton.disable = false
+  }
 
   def add(): Unit =
     SessionDialog(context, Session(propertyId = model.selectedPropertyId.value)).showAndWait() match
