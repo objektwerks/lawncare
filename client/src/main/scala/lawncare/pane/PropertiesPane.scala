@@ -1,7 +1,7 @@
 package lawncare.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.{TableColumn, TableView}
+import scalafx.scene.control.{Button, TableColumn, TableView}
 import scalafx.scene.layout.VBox
 
 import lawncare.{Context, Model, Property}
@@ -18,3 +18,9 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
       ,
     )
     items = model.observableProperties
+
+  val addButton = new Button:
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = false
+    onAction = { _ => add() }
