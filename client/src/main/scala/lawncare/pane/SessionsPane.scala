@@ -2,7 +2,7 @@ package lawncare.pane
 
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, TableColumn, TableView}
-import scalafx.scene.layout.VBox
+import scalafx.scene.layout.{HBox, VBox}
 
 import lawncare.{Context, Model, Session}
 
@@ -81,3 +81,7 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
     text = context.buttonEdit
     disable = true
     onAction = { _ => update() }
+
+  val buttonBar = new HBox:
+    spacing = 6
+    children = List(addButton, editButton)
