@@ -75,3 +75,9 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
     text = context.buttonAdd
     disable = true
     onAction = { _ => add() }
+
+  val editButton = new Button:
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
