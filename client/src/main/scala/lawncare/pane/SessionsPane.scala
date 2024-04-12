@@ -93,3 +93,12 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
         tableView.selectionModel().select(0)
       }
       case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val session = tableView.selectionModel().getSelectedItem.session
+    SessionDialog(context, session).showAndWait() match
+      case Some(session: Session) => model.update(selectedIndex, session){
+        tableView.selectionModel().select(selectedIndex)
+      }
+      case _ =>
