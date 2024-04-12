@@ -1,8 +1,8 @@
 package lawncare.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Button, TableColumn, TableView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.control.{Button, Tab, TabPane, TableColumn, TableView}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import lawncare.{Context, Model, Property}
 
@@ -46,3 +46,19 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
   val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton, faultsButton, accountButton)
+
+  val tab = new Tab:
+  	text = context.tabProperties
+  	closable = false
+  	content = new VBox {
+      spacing = 6
+      padding = Insets(6)
+      children = List(tableView, buttonBar)
+    }
+
+  val tabPane = new TabPane:
+    tabs = List(tab)
+
+  children = List(tabPane)
+  VBox.setVgrow(tableView, Priority.Always)
+  VBox.setVgrow(tabPane, Priority.Always)
