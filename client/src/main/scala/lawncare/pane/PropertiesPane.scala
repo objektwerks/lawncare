@@ -36,3 +36,9 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
     text = context.buttonFaults
     disable = true
     onAction = { _ => faults() }
+
+  val accountButton = new Button:
+    graphic = context.accountImage
+    text = context.buttonAccount
+    disable = false
+    onAction = { _ => account() }
