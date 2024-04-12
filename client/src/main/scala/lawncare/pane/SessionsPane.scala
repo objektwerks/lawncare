@@ -5,6 +5,7 @@ import scalafx.scene.control.{Button, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, VBox}
 
 import lawncare.{Context, Model, Session}
+import lawncare.dialog.SessionDialog
 
 final class SessionsPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -85,3 +86,10 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
   val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton)
+
+  def add(): Unit =
+    SessionDialog(context, Session(propertyId = model.selectedPropertyId.value)).showAndWait() match
+      case Some(session: Session) => model.add(0, session) {
+        tableView.selectionModel().select(0)
+      }
+      case _ =>
