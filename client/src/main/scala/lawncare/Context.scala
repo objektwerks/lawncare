@@ -35,7 +35,18 @@ final class Context(config: Config):
   val errorLogin = config.getString("error.login")
 
   val headerFault = config.getString("header.fault")
+  val headerLocation = config.getString("header.location")
   val headerOccurred = config.getString("header.occurred")
+  val headerNote = config.getString("header.note")
+  val headerMowed = config.getString("header.mowed")
+  val headerEdged = config.getString("header.edged")
+  val headerTrimmed = config.getString("header.trimmed")
+  val headerBlowed = config.getString("header.blowed")
+  val headerFertilized = config.getString("header.fertilized")
+  val headerPesticided = config.getString("header.pesticided")
+  val headerWeeded = config.getString("header.weeded")
+  val headerWaterd = config.getString("header.watered")
+  val headerRepaired = config.getString("header.repaired")
 
   val labelLicense = config.getString("label.license")
   val labelEmail = config.getString("label.email")
