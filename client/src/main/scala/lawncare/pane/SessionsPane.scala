@@ -1,8 +1,8 @@
 package lawncare.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Button, TableColumn, TableView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.control.{Button, Tab, TabPane, TableColumn, TableView}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import lawncare.{Context, Model, Session}
 import lawncare.dialog.SessionDialog
@@ -86,6 +86,22 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
   val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton)
+
+  val tab = new Tab:
+  	text = context.tabSessions
+  	closable = false
+  	content = new VBox {
+      spacing = 6
+      padding = Insets(6)
+      children = List(tableView, buttonBar)
+    }
+
+  val tabPane = new TabPane:
+    tabs = List(tab)
+
+  children = List(tabPane)
+  VBox.setVgrow(tableView, Priority.Always)
+  VBox.setVgrow(tabPane, Priority.Always)
 
   def add(): Unit =
     SessionDialog(context, Session(propertyId = model.selectedPropertyId.value)).showAndWait() match
