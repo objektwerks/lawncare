@@ -32,6 +32,7 @@ final case class Property(id: Long = 0,
                           location: String,
                           added: String = Entity.now()) extends Entity:
   val locationProperty = ObjectProperty[String](this, "location", location)
+  val property = this
 
 object Property:
   given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
