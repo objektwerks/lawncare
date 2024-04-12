@@ -68,4 +68,4 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
     )
-    items = model.observableCleanings
+    items = model.observableSessions
