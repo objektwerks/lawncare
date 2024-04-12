@@ -6,6 +6,8 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.*
 import java.time.LocalDate
 import java.util.UUID
 
+import scalafx.beans.property.ObjectProperty
+
 sealed trait Entity:
   val id: Long
 
@@ -28,7 +30,8 @@ object Account:
 final case class Property(id: Long = 0,
                           accountId: Long,
                           location: String,
-                          added: String = Entity.now()) extends Entity
+                          added: String = Entity.now()) extends Entity:
+  val locationProperty = ObjectProperty[String](this, "location", location)
 
 object Property:
   given JsonValueCodec[Property] = JsonCodecMaker.make[Property]
