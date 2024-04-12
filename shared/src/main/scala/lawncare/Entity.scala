@@ -50,7 +50,10 @@ final case class Session(id: Long = 0,
                          watered: Boolean = false,
                          repaired: Boolean = false,
                          note: String = "",
-                         occurred: String = Entity.now()) extends Entity
+                         occurred: String = Entity.now()) extends Entity:
+  val noteProperty = ObjectProperty[String](this, "occurred", occurred)
+  val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
+  val session = this
 
 object Session:
   given JsonValueCodec[Session] = JsonCodecMaker.make[Session]
