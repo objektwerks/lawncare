@@ -1,11 +1,11 @@
-val helidonVersion = "4.0.7"
+val helidonVersion = "4.0.6"
 val scalafxVersion = "21.0.0-R32"
-val logbackVersion = "1.5.4"
+val logbackVersion = "1.5.3"
 val scalatestVersion = "3.2.18"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.2",
+  version := "0.3-SNAPSHOT",
   scalaVersion := "3.4.2-RC1",
   scalacOptions ++= Seq(
     "-Wunused:all"
@@ -71,11 +71,11 @@ lazy val lawncare = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "lawncare-mac-0.2.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "lawncare-m1-0.2.jar"
-  else if (OS == "win") assemblyJarName := "lawncare-win-0.2.jar"
-  else if (OS == "linux") assemblyJarName := "lawncare-linux-0.2.jar"
-  else assemblyJarName := "lawncare-no-valid-target-specified-0.2.jar"
+  if (OS == "mac") assemblyJarName := "lawncare-mac-0.3.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "lawncare-m1-0.3.jar"
+  else if (OS == "win") assemblyJarName := "lawncare-win-0.3.jar"
+  else if (OS == "linux") assemblyJarName := "lawncare-linux-0.3.jar"
+  else assemblyJarName := "lawncare-no-valid-target-specified-0.3.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
