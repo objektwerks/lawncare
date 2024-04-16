@@ -74,9 +74,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault("Save property failed:", error) }
      .get
 
-  private def listSessions(swimmerId: Long): Event =
+  private def listSessions(propertyId: Long): Event =
     Try {
-      SessionsListed( store.listSessions(swimmerId) )
+      SessionsListed( store.listSessions(propertyId) )
     }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
      .get
 
@@ -86,7 +86,22 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if session.id == 0 then store.addSession(session)
         else store.updateSession(session)
       )
-    }.recover { case NonFatal(error) => Fault("Save cleaning failed:", error) }
+    }.recover { case NonFatal(error) => Fault("Save session failed:", error) }
+     .get
+
+  private def listIssues(propertyId: Long): Event =
+    Try {
+      IssuesListed( store.listIssues(propertyId) )
+    }.recover { case NonFatal(error) => Fault("List issues failed:", error) }
+     .get
+
+  private def saveIssue(issue: Issue): Event =
+    Try {
+      IssueSaved(
+        if issue.id == 0 then store.addIssue(issue)
+        else store.updateIssue(issue)
+      )
+    }.recover { case NonFatal(error) => Fault("Save issue failed:", error) }
      .get
 
   private def addFault(fault: Fault): Event =
