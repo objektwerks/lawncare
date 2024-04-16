@@ -70,7 +70,8 @@ object Session:
 
 final case class Issue(id: Long: = 0,
                        propertyId: Long,
-                       reported: String = Entity.now()) extends Entity:
+                       reported: String = Entity.now(),
+                       resolved: String = "") extends Entity:
   val issue = this
 
 object Issue:
