@@ -31,5 +31,6 @@ final case class ListSessions(license: String, propertyId: Long) extends Command
 final case class SaveSession(license: String, session: Session) extends Command with License
 
 final case class ListIssues(license: String, propertyId: Long) extends Command with License
+final case class SaveIssue(license: String, issue: Issue) extends Command with License
 
 final case class AddFault(license: String, fault: Fault) extends Command with License
