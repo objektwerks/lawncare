@@ -23,6 +23,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   var testAccount = Account()
   var testProperty = Property(accountId = 0, location = "a")
   var testSession = Session(propertyId = 0)
+  var testIssue = Issue(propertyId = 0, report = "sprinkler broken")
 
   test("integration"):
     register
