@@ -27,6 +27,13 @@ object Validator:
       session.propertyId > 0 &&
       session.occurred.nonEmpty
 
+  extension (issue: Issue)
+    def isValid: Boolean =
+      issue.id >= 0 &&
+      issue.propertyId > 0 &&
+      issue.report.nonEmpty &&
+      issue.reported.nonEmpty
+
   extension  (license: License)
     def isLicense: Boolean =
       license.license.isLicense
