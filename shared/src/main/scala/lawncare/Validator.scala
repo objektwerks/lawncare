@@ -71,6 +71,16 @@ object Validator:
       saveSession.license.isLicense &&
       saveSession.session.isValid
 
+  extension (listIssues: ListIssues)
+    def isValid: Boolean =
+      listIssues.license.isLicense &&
+      listIssues.propertyId > 0
+
+  extension (saveIssue: SaveIssue)
+    def isValid: Boolean =
+      saveIssue.license.isLicense &&
+      saveIssue.issue.isValid
+
   extension (addFault: AddFault)
     def isValid: Boolean =
       addFault.license.isLicense &&
