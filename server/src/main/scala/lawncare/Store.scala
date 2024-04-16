@@ -169,6 +169,15 @@ final class Store(config: Config,
       .updateAndReturnGeneratedKey()
   }
 
+  def updateIssue(issue: Issue): Long = DB localTx { implicit session =>
+    sql"""
+      update issue set report = ${issue.report}, resolution = ${issue.resolution}, reported = ${issue.reported},
+      resolved = ${issue.resolved} where id = ${issue.id}
+      """
+      .update()
+    issue.id
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
