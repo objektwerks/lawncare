@@ -85,4 +85,6 @@ object Validator:
         case saveProperty @ SaveProperty(_, _)     => saveProperty.isValid
         case listSessions @ ListSessions(_, _)     => listSessions.isValid
         case saveSession @ SaveSession(_, _)       => saveSession.isValid
+        case listIssues @ ListIssues(_, _)         => listIssues.isValid
+        case saveIssue @ SaveIssue(_, _)           => saveIssue.isValid
         case addFault @ AddFault(_, _)             => addFault.isValid
