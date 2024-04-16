@@ -69,7 +69,8 @@ object Session:
   given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
 
 final case class Issue(id: Long: = 0,
-                       propertyId: Long) extends Entity:
+                       propertyId: Long,
+                       reported: String = Entity.now()) extends Entity:
   val issue = this
 
 object Issue:
