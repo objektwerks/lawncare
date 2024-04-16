@@ -18,6 +18,9 @@ object Command:
   given JsonValueCodec[ListSessions] = JsonCodecMaker.make[ListSessions]
   given JsonValueCodec[SaveSession] = JsonCodecMaker.make[SaveSession]
 
+  given JsonValueCodec[ListIssues] = JsonCodecMaker.make[ListIssues]
+  given JsonValueCodec[SaveIssue] = JsonCodecMaker.make[SaveIssue]
+
 sealed trait License:
   val license: String
 
