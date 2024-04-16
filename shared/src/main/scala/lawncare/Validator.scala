@@ -2,7 +2,7 @@ package lawncare
 
 object Validator:
   extension (value: String)
-    def isEmptyOrNotEmpty: Boolean = value.isEmpty || value.nonEmpty
+    def isEmptyOrNonEmpty: Boolean = value.isEmpty || value.nonEmpty
     def isLicense: Boolean = if value.nonEmpty && value.length == 36 then true else false
     def isPin: Boolean = value.length == 7
     def isEmail: Boolean = value.nonEmpty && value.length >= 3 && value.contains("@")
@@ -26,7 +26,7 @@ object Validator:
     def isValid: Boolean =
       session.id >= 0 &&
       session.propertyId > 0 &&
-      session.note.isEmptyOrNotEmpty &&
+      session.note.isEmptyOrNonEmpty &&
       session.occurred.nonEmpty
 
   extension (issue: Issue)
@@ -34,9 +34,9 @@ object Validator:
       issue.id >= 0 &&
       issue.propertyId > 0 &&
       issue.report.nonEmpty &&
-      issue.resolution.isEmptyOrNotEmpty &&
+      issue.resolution.isEmptyOrNonEmpty &&
       issue.reported.nonEmpty &&
-      issue.resolved.isEmptyOrNotEmpty
+      issue.resolved.isEmptyOrNonEmpty
 
   extension  (license: License)
     def isLicense: Boolean =
