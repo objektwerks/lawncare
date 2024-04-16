@@ -82,3 +82,4 @@ final case class Issue(id: Long = 0,
 
 object Issue:
   given JsonValueCodec[Issue] = JsonCodecMaker.make[Issue]
+  given Ordering[Issue] = Ordering.by[Issue, String](issue => issue.reported).reverse
