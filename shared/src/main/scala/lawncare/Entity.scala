@@ -72,6 +72,8 @@ final case class Issue(id: Long: = 0,
                        propertyId: Long,
                        reported: String = Entity.now(),
                        resolved: String = "") extends Entity:
+  val reportedProperty = ObjectProperty[String](this, "reported", reported)
+  val resolvedProperty = ObjectProperty[String](this, "resolved", resolved)
   val issue = this
 
 object Issue:
