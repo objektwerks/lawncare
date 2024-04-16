@@ -68,7 +68,7 @@ object Session:
   given JsonValueCodec[Session] = JsonCodecMaker.make[Session]
   given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
 
-final case class Issue(id: Long: = 0,
+final case class Issue(id: Long = 0,
                        propertyId: Long,
                        report: String = "",
                        resolution: String = "",
