@@ -146,6 +146,21 @@ final class Store(config: Config,
     sess.id
   }
 
+  def listIssues(propertyId: Long): List[Issue] = DB readOnly { implicit session =>
+    sql"select * from issue where property_id = $propertyId order by reported desc"
+      .map(rs =>
+        Issue(
+          rs.long("id"),
+          rs.long("property_id"),
+          rs.string("report"),
+          rs.string("resolved"),
+          rs.string("reported"),
+          rs.string("resolved")
+        )
+      )
+      .list()
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
