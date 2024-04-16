@@ -34,6 +34,9 @@ final case class PropertySaved(id: Long) extends Event
 final case class SessionsListed(sessions: List[Session]) extends Event
 final case class SessionSaved(id: Long) extends Event
 
+final case class IssuesListed(issues: List[Issue]) extends Event
+final case class IssueSaved(id: Long) extends Event
+
 object Fault:
   def apply(throwable: Throwable, defaultMessage: String): Fault =
     val message = throwable.getMessage
