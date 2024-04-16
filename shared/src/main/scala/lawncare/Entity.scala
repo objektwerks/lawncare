@@ -71,3 +71,6 @@ object Session:
 final case class Issue(id: Long: = 0,
                        propertyId: Long) extends Entity:
   val issue = this
+
+object Issue:
+  given JsonValueCodec[Issue] = JsonCodecMaker.make[Issue]
