@@ -67,3 +67,6 @@ final case class Session(id: Long = 0,
 object Session:
   given JsonValueCodec[Session] = JsonCodecMaker.make[Session]
   given Ordering[Session] = Ordering.by[Session, String](session => session.occurred).reverse
+
+final case class Issue(id: Long: = 0,
+                       propertyId: Long) extends Entity
