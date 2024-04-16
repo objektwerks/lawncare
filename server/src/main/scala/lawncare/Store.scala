@@ -161,6 +161,14 @@ final class Store(config: Config,
       .list()
   }
 
+  def addIssue(issue: Issue): Long = DB localTx { implicit session =>
+    sql"""
+      insert into issue(property_id, report, resolution, reported, resolved)
+      values(${issue.propertyId}, ${issue.report}, ${issue.resolution}, ${issue.reported}, ${issue.resolved})
+      """
+      .updateAndReturnGeneratedKey()
+  }
+
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
