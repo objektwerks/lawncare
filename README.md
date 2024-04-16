@@ -11,7 +11,7 @@ Model
 
 Session
 -------
->Properties:
+>Session properties:
 * mowed ( yard )
 * edged ( driveway, curbing )
 * trimmed ( plant, tree )
