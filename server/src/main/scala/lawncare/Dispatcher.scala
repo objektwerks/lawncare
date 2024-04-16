@@ -19,8 +19,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case Login(emailAddress, pin)     => login(emailAddress, pin)
       case ListProperties(_, accountId) => listProperties(accountId)
       case SaveProperty(_, property)    => saveProperty(property)
-      case ListSessions(_, walkerId)    => listSessions(walkerId)
+      case ListSessions(_, propertyId)  => listSessions(propertyId)
       case SaveSession(_, session)      => saveSession(session)
+      case ListIssues(_, propertyId)    => listIssues(propertyId)
+      case SaveIssue(_, issue)          => saveIssue(issue)
       case AddFault(_, fault)           => addFault(fault)
 
     event match
