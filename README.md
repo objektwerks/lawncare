@@ -6,6 +6,7 @@ Model
 -----
 * Account 1 --> * Property
 * Property 1 --> * Session
+* Property 1 --> * Issue
 * Fault
 
 Session
