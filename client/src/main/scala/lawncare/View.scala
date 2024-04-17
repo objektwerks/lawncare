@@ -13,15 +13,15 @@ final class View(context: Context, model: Model):
     prefHeight = context.windowHeight
     padding = Insets(6)
 
-  val walkersPane = PropertiesPane(context, model)
-  VBox.setVgrow(walkersPane, Priority.Always)
+  val propertiesPane = PropertiesPane(context, model)
+  VBox.setVgrow(propertiesPane, Priority.Always)
 
   val sessionsPane = SessionsPane(context, model)
   VBox.setVgrow(sessionsPane, Priority.Always)
 
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
-    items.addAll(walkersPane, sessionsPane)
+    items.addAll(propertiesPane, sessionsPane)
   }
   splitPane.setDividerPositions(0.20, 0.80)
   VBox.setVgrow(splitPane, Priority.Always)
