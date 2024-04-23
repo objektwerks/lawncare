@@ -34,3 +34,11 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
+
+  resultConverter = dialogButton =>
+    if dialogButton == saveButtonType then
+      issue.copy(
+        report = reportTextField.text.toString,
+        resolution = resolutionTextField.text.toString
+      )
+    else null
