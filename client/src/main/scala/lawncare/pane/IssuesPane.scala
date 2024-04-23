@@ -47,3 +47,12 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
   val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton)
+
+  val tab = new Tab:
+  	text = context.tabSessions
+  	closable = false
+  	content = new VBox {
+      spacing = 6
+      padding = Insets(6)
+      children = List(tableView, buttonBar)
+    }
