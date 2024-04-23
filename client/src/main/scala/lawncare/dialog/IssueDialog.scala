@@ -20,3 +20,6 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
 
   val reportedDatePicker = new DatePicker:
       value = Entity.localDate(issue.reported)
+
+  val resolvedDatePicker = new DatePicker:
+      value = Entity.localDate(issue.resolved)
