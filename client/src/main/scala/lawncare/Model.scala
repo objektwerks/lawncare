@@ -16,6 +16,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   val selectedPropertyId = ObjectProperty[Long](0)
   val selectedSessionId = ObjectProperty[Long](0)
+  val selectedIssueId = ObjectProperty[Long](0)
 
   selectedPropertyId.onChange { (_, oldPropertyId, newPropertyId) =>
     logger.info("*** selected property id onchange event: {} -> {}", oldPropertyId, newPropertyId)
