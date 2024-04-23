@@ -63,3 +63,7 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
   children = List(tabPane)
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
+
+  model.selectedSessionId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
