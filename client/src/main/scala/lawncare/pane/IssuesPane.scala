@@ -43,3 +43,7 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
     text = context.buttonEdit
     disable = true
     onAction = { _ => update() }
+
+  val buttonBar = new HBox:
+    spacing = 6
+    children = List(addButton, editButton)
