@@ -30,3 +30,4 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
         text = context.headerResolved
         cellValueFactory = _.value.resolvedProperty
     )
+    items = model.observableIssues
