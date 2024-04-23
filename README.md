@@ -2,6 +2,10 @@ Lawncare
 --------
 Lawn care app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, Helidon, PostgreSql and Scala 3.
 
+Todo
+----
+1. Test client.
+
 Model
 -----
 * Account 1 --> * Property
