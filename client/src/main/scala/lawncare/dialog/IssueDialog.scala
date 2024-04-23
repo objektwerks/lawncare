@@ -14,3 +14,6 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
 
   val reportTextField = new TextField:
     text = issue.report
+
+  val resolutionTextField = new TextField:
+    text = issue.resolution
