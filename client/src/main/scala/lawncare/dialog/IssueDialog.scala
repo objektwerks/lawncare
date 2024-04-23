@@ -1,7 +1,7 @@
 package lawncare.dialog
 
 import scalafx.Includes.*
-import scalafx.scene.control.{Dialog, TextField}
+import scalafx.scene.control.{DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
@@ -17,3 +17,6 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
 
   val resolutionTextField = new TextField:
     text = issue.resolution
+
+  val reportedDatePicker = new DatePicker:
+      value = issue.reported.toLocalDate
