@@ -5,7 +5,7 @@ import scalafx.scene.control.{DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import lawncare.{Client, Context, Issue}
+import lawncare.{Client, Context, Entity, Issue}
 
 final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
   initOwner(Client.stage)
@@ -19,4 +19,4 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
     text = issue.resolution
 
   val reportedDatePicker = new DatePicker:
-      value = issue.reported.toLocalDate
+      value = Entity.localDate(issue.reported)
