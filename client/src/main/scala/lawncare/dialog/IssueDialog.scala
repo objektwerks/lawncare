@@ -30,3 +30,4 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
     context.labelReported -> reportedDatePicker,
     context.labelResolved -> resolvedDatePicker
   )
+  dialogPane().content = ControlGridPane(controls)
