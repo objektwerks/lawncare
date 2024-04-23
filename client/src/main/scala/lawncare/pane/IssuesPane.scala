@@ -36,7 +36,7 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
     graphic = context.addImage
     text = context.buttonAdd
     disable = true
-    onAction = { _ => add() }a
+    onAction = { _ => add() }
 
   val editButton = new Button:
     graphic = context.editImage
