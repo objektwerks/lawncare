@@ -41,6 +41,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info("*** observable sessions onchange event: {}", changes)
   }
 
+  observableIssues.onChange { (_, changes) =>
+    logger.info("*** observable issues onchange event: {}", changes)
+  }
+
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
     logger.error("*** cause: {}", cause)
