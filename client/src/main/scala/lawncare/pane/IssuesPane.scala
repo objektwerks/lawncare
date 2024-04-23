@@ -56,3 +56,6 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
       padding = Insets(6)
       children = List(tableView, buttonBar)
     }
+
+  val tabPane = new TabPane:
+    tabs = List(tab)
