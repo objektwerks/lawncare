@@ -68,7 +68,6 @@ final class SessionsPane(context: Context, model: Model) extends VBox:
         text = context.headerRepaired
         cellValueFactory = _.value.repairedProperty
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
-      ,
     )
     items = model.observableSessions
 
