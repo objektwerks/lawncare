@@ -27,6 +27,6 @@ final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
   val controls = List[(String, Region)](
     context.labelReport -> reportTextField,
     context.labelResolution -> resolutionTextField,
-    context.labelReported -> reportedTextField,
-    context.labelResolved -> resolvedTextField
+    context.labelReported -> reportedDatePicker,
+    context.labelResolved -> resolvedDatePicker
   )
