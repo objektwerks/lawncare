@@ -22,4 +22,11 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
         text = context.headerResolution
         cellValueFactory = _.value.resolutionProperty
       ,
+      new TableColumn[Issue, String]:
+        text = context.headerReported
+        cellValueFactory = _.value.reportedProperty
+      ,
+      new TableColumn[Issue, String]:
+        text = context.headerResolved
+        cellValueFactory = _.value.resolvedProperty
     )
