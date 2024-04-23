@@ -31,3 +31,9 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
         cellValueFactory = _.value.resolvedProperty
     )
     items = model.observableIssues
+
+  val addButton = new Button:
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = true
+    onAction = { _ => add() }
