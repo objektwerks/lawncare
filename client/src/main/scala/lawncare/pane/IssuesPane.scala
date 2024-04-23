@@ -81,3 +81,9 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
       editButton.disable = false
   }
 
+  def add(): Unit =
+    IssueDialog(context, Issue(propertyId = model.selectedPropertyId.value)).showAndWait() match
+      case Some(issue: Issue) => model.add(0, issue) {
+        tableView.selectionModel().select(0)
+      }
+      case _ =>
