@@ -5,7 +5,7 @@ val scalatestVersion = "3.2.18"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
-  version := "0.4",
+  version := "0.5-SNAPSHOT",
   scalaVersion := "3.4.2-RC1",
   scalacOptions ++= Seq(
     "-Wunused:all"
@@ -71,11 +71,11 @@ lazy val lawncare = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "lawncare-mac-0.4.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "lawncare-m1-0.4.jar"
-  else if (OS == "win") assemblyJarName := "lawncare-win-0.4.jar"
-  else if (OS == "linux") assemblyJarName := "lawncare-linux-0.4.jar"
-  else assemblyJarName := "lawncare-no-valid-target-specified-0.4.jar"
+  if (OS == "mac") assemblyJarName := "lawncare-mac-0.5.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "lawncare-m1-0.5.jar"
+  else if (OS == "win") assemblyJarName := "lawncare-win-0.5.jar"
+  else if (OS == "linux") assemblyJarName := "lawncare-linux-0.5.jar"
+  else assemblyJarName := "lawncare-no-valid-target-specified-0.5.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
