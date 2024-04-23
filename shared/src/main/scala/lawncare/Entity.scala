@@ -14,14 +14,14 @@ sealed trait Entity:
 object Entity:
   given JsonValueCodec[Entity] = JsonCodecMaker.make[Entity]
 
-  def now(): String = LocalDate.now().toString()
+  def now: String = LocalDate.now.toString
   def localDate(now: String): LocalDate = if now.nonEmpty then LocalDate.parse(now) else LocalDate.now
 
 final case class Account(id: Long = 0,
                          license: String = UUID.randomUUID.toString,
                          email: String = "",
                          pin: String = Pin.newInstance,
-                         activated: String = Entity.now()) extends Entity
+                         activated: String = Entity.now) extends Entity
 
 object Account:
   val empty = Account(license = "", email = "", pin = "")
@@ -30,7 +30,7 @@ object Account:
 final case class Property(id: Long = 0,
                           accountId: Long,
                           location: String,
-                          added: String = Entity.now()) extends Entity:
+                          added: String = Entity.now) extends Entity:
   val locationProperty = ObjectProperty[String](this, "location", location)
   val property = this
 
@@ -50,7 +50,7 @@ final case class Session(id: Long = 0,
                          watered: Boolean = false,
                          repaired: Boolean = false,
                          note: String = "",
-                         occurred: String = Entity.now()) extends Entity:
+                         occurred: String = Entity.now) extends Entity:
   val mowedProperty = ObjectProperty[Boolean](this, "mowed", mowed)
   val edgedProperty = ObjectProperty[Boolean](this, "edged", edged)
   val trimmedProperty = ObjectProperty[Boolean](this, "trimmed", trimmed)
@@ -72,8 +72,8 @@ final case class Issue(id: Long = 0,
                        propertyId: Long,
                        report: String = "",
                        resolution: String = "",
-                       reported: String = Entity.now(),
-                       resolved: String = Entity.now()) extends Entity:
+                       reported: String = Entity.now,
+                       resolved: String = Entity.now) extends Entity:
   val reportProperty = ObjectProperty[String](this, "report", report)
   val resolutionProperty = ObjectProperty[String](this, "resolution", resolution)
   val reportedProperty = ObjectProperty[String](this, "reported", reported)
