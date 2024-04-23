@@ -64,6 +64,10 @@ final class Context(config: Config):
   val labelNote = config.getString("label.note")
   val labelProperties = config.getString("label.properties")
   val labelSessions = config.getString("label.sessions")
+  val labelReport = config.getString("label.report")
+  val labelResolution = config.getString("label.resolution")
+  val labelReported = config.getString("label.reported")
+  val labelResolved = config.getString("label.resolved")
 
   val tabProperties = config.getString("tab.properties")
   val tabSessions = config.getString("tab.sessions")
