@@ -20,7 +20,7 @@ final class View(context: Context, model: Model):
   VBox.setVgrow(sessionsPane, Priority.Always)
 
   val issuesPane = IssuesPane(context, model)
-  VBox.setVgrow(sessionsPane, Priority.Always)
+  VBox.setVgrow(issuesPane, Priority.Always)
 
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
