@@ -71,6 +71,7 @@ final class Context(config: Config):
 
   val tabProperties = config.getString("tab.properties")
   val tabSessions = config.getString("tab.sessions")
+  val tabIssues = config.getString("tab.issues")
 
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
