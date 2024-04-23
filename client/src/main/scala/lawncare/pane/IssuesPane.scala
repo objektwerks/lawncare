@@ -59,3 +59,7 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
 
   val tabPane = new TabPane:
     tabs = List(tab)
+
+  children = List(tabPane)
+  VBox.setVgrow(tableView, Priority.Always)
+  VBox.setVgrow(tabPane, Priority.Always)
