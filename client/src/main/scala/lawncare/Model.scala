@@ -167,3 +167,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableIssues ++= issues
         case _ => ()
     )
+
+  def add(selectedIndex: Int, issue: Issue)(runLast: => Unit): Unit =
+    fetcher.fetch(
+      SaveIssue(objectAccount.get.license, issue),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchFault("Model.save issue", issue, fault)
+        case IssueSaved(id) =>
+          observableIssues += issue.copy(id = id)
+          observableIssues.sort()
+          selectedIssueId.set(id)
+          runLast
+        case _ => ()
+    )
