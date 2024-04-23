@@ -156,3 +156,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           runLast
         case _ => ()
     )
+
+  def issues(propertyId: Long): Unit =
+    fetcher.fetch(
+      ListIssues(objectAccount.get.license, propertyId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFetchFault("Model.issues", fault)
+        case IssuesListed(issues) =>
+          observableIssues.clear()
+          observableIssues ++= issues
+        case _ => ()
+    )
