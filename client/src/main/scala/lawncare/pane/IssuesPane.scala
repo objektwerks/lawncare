@@ -67,3 +67,17 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
   model.selectedSessionId.onChange { (_, _, _) =>
     addButton.disable = false
   }
+
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
+  tableView.selectionModel().selectionModeProperty().value = SelectionMode.Single
+
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedIssueId.value = selectedItem.id
+      editButton.disable = false
+  }
+
