@@ -47,6 +47,10 @@ final class Context(config: Config):
   val headerWeeded = config.getString("header.weeded")
   val headerWaterd = config.getString("header.watered")
   val headerRepaired = config.getString("header.repaired")
+  val headerReport = config.getString("header.report")
+  val headerResolution = config.getString("header.resolution")
+  val headerReported = config.getString("header.reported")
+  val headerResolved = config.getString("header.resolved")
 
   val labelLicense = config.getString("label.license")
   val labelEmail = config.getString("label.email")
