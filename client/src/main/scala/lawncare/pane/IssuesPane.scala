@@ -11,3 +11,15 @@ import lawncare.dialog.IssueDialog
 final class IssuesPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
+
+  val tableView = new TableView[Issue]():
+    columns ++= List(
+      new TableColumn[Issue, String]:
+        text = context.headerReport
+        cellValueFactory = _.value.reportProperty
+      ,
+      new TableColumn[Issue, String]:
+        text = context.headerResolution
+        cellValueFactory = _.value.resolutionProperty
+      ,
+    )
