@@ -5,7 +5,7 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{Priority, VBox}
 
-import lawncare.pane.{IssuesPane, PropertiesPane, SessionsPane}
+import lawncare.pane.{PropertiesPane, TabbedPane}
 
 final class View(context: Context, model: Model):
   val vbox = new VBox:
@@ -16,15 +16,12 @@ final class View(context: Context, model: Model):
   val propertiesPane = PropertiesPane(context, model)
   VBox.setVgrow(propertiesPane, Priority.Always)
 
-  val sessionsPane = SessionsPane(context, model)
-  VBox.setVgrow(sessionsPane, Priority.Always)
-
-  val issuesPane = IssuesPane(context, model)
-  VBox.setVgrow(issuesPane, Priority.Always)
+  val tabbedPane = TabbedPane(context, model)
+  VBox.setVgrow(tabbedPane, Priority.Always)
 
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
-    items.addAll(propertiesPane, sessionsPane, issuesPane)
+    items.addAll(propertiesPane, tabbedPane)
   }
   splitPane.setDividerPositions(0.20, 0.80)
   VBox.setVgrow(splitPane, Priority.Always)
