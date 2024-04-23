@@ -36,7 +36,7 @@ object Validator:
       issue.report.nonEmpty &&
       issue.resolution.isEmptyOrNonEmpty &&
       issue.reported.nonEmpty &&
-      issue.resolved.isEmptyOrNonEmpty
+      issue.resolved.nonEmpty
 
   extension  (license: License)
     def isLicense: Boolean =
