@@ -110,7 +110,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid issue saved event: $fault")
 
   def updateIssue: Unit =
-    testIssue = testIssue.copy(resolution = "fixed sprinkler", resolved = Entity.now())
+    testIssue = testIssue.copy(resolution = "fixed sprinkler", resolved = Entity.now)
     val saveIssue = SaveIssue(testAccount.license, testIssue)
     dispatcher.dispatch(saveIssue) match
       case IssueSaved(id) => id shouldBe testIssue.id
