@@ -87,3 +87,12 @@ final class IssuesPane(context: Context, model: Model) extends VBox:
         tableView.selectionModel().select(0)
       }
       case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val issue = tableView.selectionModel().getSelectedItem.issue
+    IssueDialog(context, issue).showAndWait() match
+      case Some(issue: Issue) => model.update(selectedIndex, issue){
+        tableView.selectionModel().select(selectedIndex)
+      }
+      case _ =>
