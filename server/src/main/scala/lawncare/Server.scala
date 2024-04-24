@@ -32,7 +32,7 @@ object Server extends LazyLogging:
       .build
       .start
 
-    println(s"*** Press Control-C to shutdown Lawncare Http Server at: $host:$port")
-    logger.info(s"*** Lawncare Http Server started at: $host:$port")
+    println(s"*** Press Control-C to shutdown Lawncare Http Server at: $host:$port$endpoint")
+    logger.info(s"*** Lawncare Http Server started at: $host:$port$endpoint")
 
     Thread.currentThread().join()
