@@ -17,7 +17,6 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Property, String]:
         text = context.headerLocation
         cellValueFactory = _.value.locationProperty
-      ,
     )
     items = model.observableProperties
 
