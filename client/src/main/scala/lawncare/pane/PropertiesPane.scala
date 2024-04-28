@@ -15,11 +15,11 @@ final class PropertiesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Property]():
     columns ++= List(
       new TableColumn[Property, String]:
-        prefWidth = 1.0
         text = context.headerLocation
         cellValueFactory = _.value.locationProperty
     )
     items = model.observableProperties
+  tableView.columnResizePolicy = TableView.ConstrainedResizePolicy
 
   val addButton = new Button:
     graphic = context.addImage
