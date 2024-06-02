@@ -7,7 +7,8 @@ import scalafx.scene.control.ButtonBar.ButtonData
 
 import lawncare.{Client, Context, Property}
 
-final class PropertyDialog(context: Context, property: Property) extends Dialog[Property]:
+final class PropertyDialog(context: Context,
+                           property: Property) extends Dialog[Property]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogProperty
