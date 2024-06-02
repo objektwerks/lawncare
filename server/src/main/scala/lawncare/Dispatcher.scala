@@ -104,8 +104,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if issue.id == 0 then store.addIssue(issue)
         else
           if store.isIssueResolved(issue) then
-            val optionalEmail = store.getAccountEmail(license)
-            if optionalEmail.isDefined then send(optionalEmail.get, s"Issue resolved: [${issue.id}] : ${issue.report}")
+            store
+              .getAccountEmail(license)
+              .fold(())(email => send(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
           store.updateIssue(issue)
       )
     }.recover { case NonFatal(error) => Fault("Save issue failed:", error) }
