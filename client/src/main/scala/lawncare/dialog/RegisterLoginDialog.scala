@@ -14,7 +14,8 @@ import lawncare.Validator.*
 final case class RegisterLogin(register: Option[Register] = None,
                                login: Option[Login] = None)
 
-final class RegisterLoginDialog(primaryStage: Stage, context: Context) extends Dialog[RegisterLogin]:
+final class RegisterLoginDialog(primaryStage: Stage,
+                                context: Context) extends Dialog[RegisterLogin]:
   initOwner(primaryStage)
   title = context.windowTitle
   headerText = context.dialogRegisterLogin
