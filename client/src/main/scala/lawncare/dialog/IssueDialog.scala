@@ -23,7 +23,7 @@ final class IssueDialog(context: Context,
       value = Entity.localDate(issue.reported)
 
   val resolvedDatePicker = new DatePicker:
-      value = if issue.resolved.nonEmpty then Entity.localDate(issue.resolved) else Entity.localDate(Entity.now)
+      value = Entity.localDate(issue.resolved)
 
   val controls = List[(String, Region)](
     context.labelReport -> reportTextField,
