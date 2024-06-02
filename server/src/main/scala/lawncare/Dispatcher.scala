@@ -22,7 +22,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case ListSessions(_, propertyId)  => listSessions(propertyId)
       case SaveSession(_, session)      => saveSession(session)
       case ListIssues(_, propertyId)    => listIssues(propertyId)
-      case SaveIssue(_, issue)          => saveIssue(issue)
+      case SaveIssue(license, issue)    => saveIssue(license, issue)
       case AddFault(_, fault)           => addFault(fault)
 
     event match
@@ -97,11 +97,16 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault("List issues failed:", error) }
      .get
 
-  private def saveIssue(issue: Issue): Event =
+  private def saveIssue(license: String,
+                        issue: Issue): Event =
     Try {
       IssueSaved(
         if issue.id == 0 then store.addIssue(issue)
-        else store.updateIssue(issue)
+        else
+          if store.isIssueResolved(issue) then
+            val optionalEmail = store.getAccountEmail(license)
+            if optionalEmail.isDefined then send(optionalEmail.get, s"Issue resolved: [${issue.id}] : ${issue.report}")
+          store.updateIssue(issue)
       )
     }.recover { case NonFatal(error) => Fault("Save issue failed:", error) }
      .get

@@ -66,6 +66,13 @@ final class Store(config: Config,
           true
         else false
 
+  def getAccountEmail(license: String): Option[String] =
+    DB readOnly { implicit session =>
+      sql"select email from account where license = $license"
+        .map(rs => rs.string("email"))
+        .single()
+    }
+
   def addAccount(account: Account): Account =
     val id = DB localTx { implicit session =>
       sql"""
