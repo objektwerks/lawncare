@@ -8,7 +8,8 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import lawncare.{Context, Model, Session}
 import lawncare.dialog.SessionDialog
 
-final class SessionsPane(context: Context, model: Model) extends VBox:
+final class SessionsPane(context: Context,
+                         model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
