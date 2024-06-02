@@ -38,6 +38,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
          .get
       case Register(_) | Login(_, _) => Authorized(true)
 
+  private def send(email: String,
+                   message: String): Unit =
+    val recipients = List(email)
+    emailer.send(recipients, message)
+
   private def register(email: String): Event =
     Try {
       val account = Account(email = email)
@@ -47,11 +52,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
      .get
 
-  private def send(email: String, message: String): Unit =
-    val recipients = List(email)
-    emailer.send(recipients, message)
-
-  private def login(email: String, pin: String): Event =
+  private def login(email: String,
+                    pin: String): Event =
     Try { store.login(email, pin) }.fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
