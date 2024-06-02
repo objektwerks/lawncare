@@ -5,7 +5,8 @@ import scalafx.scene.layout.{Priority, VBox}
 
 import lawncare.{Context, Model}
 
-final class TabbedPane(context: Context, model: Model) extends VBox:
+final class TabbedPane(context: Context,
+                       model: Model) extends VBox:
   val sessionsTab = new Tab:
   	text = context.tabSessions
   	closable = false
