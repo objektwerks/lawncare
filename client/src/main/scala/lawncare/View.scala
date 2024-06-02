@@ -7,7 +7,8 @@ import scalafx.scene.layout.{Priority, VBox}
 
 import lawncare.pane.{PropertiesPane, TabbedPane}
 
-final class View(context: Context, model: Model):
+final class View(context: Context,
+                 model: Model):
   val vbox = new VBox:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
