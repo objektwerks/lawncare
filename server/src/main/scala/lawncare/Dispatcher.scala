@@ -41,14 +41,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def register(email: String): Event =
     Try {
       val account = Account(email = email)
-      send(account.email, account.pin)
+      val message = s"<p><b>Account Registration:</b> Your new pin is: <b>${account.pin}</b> Welcome aboard!</p>"
+      send(account.email, message)
       Registered( store.register(account) )
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
      .get
 
-  private def send(email: String, pin: String): Unit =
+  private def send(email: String, message: String): Unit =
     val recipients = List(email)
-    val message = s"<p><b>Account Registration:</b> Your new pin is: <b>${pin}</b> Welcome aboard!</p>"
     emailer.send(recipients, message)
 
   private def login(email: String, pin: String): Event =
