@@ -6,7 +6,8 @@ import scalafx.scene.layout.VBox
 
 import lawncare.{Client, Context, Fault, Model}
 
-final class FaultsDialog(context: Context, model: Model) extends Dialog[Unit]:
+final class FaultsDialog(context: Context,
+                         model: Model) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogFaults
