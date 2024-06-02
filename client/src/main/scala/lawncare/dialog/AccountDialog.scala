@@ -5,7 +5,8 @@ import scalafx.scene.control.{ButtonType, Dialog, Label}
 
 import lawncare.{Account, Client, Context}
 
-final class AccountDialog(context: Context, account: Account) extends Dialog[Unit]:
+final class AccountDialog(context: Context,
+                          account: Account) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogAccount
