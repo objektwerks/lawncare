@@ -7,7 +7,8 @@ import scalafx.scene.layout.Region
 
 import lawncare.{Client, Context, Entity, Issue}
 
-final class IssueDialog(context: Context, issue: Issue) extends Dialog[Issue]:
+final class IssueDialog(context: Context,
+                        issue: Issue) extends Dialog[Issue]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogSession
