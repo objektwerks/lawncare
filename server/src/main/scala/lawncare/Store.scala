@@ -186,12 +186,12 @@ final class Store(config: Config,
   }
 
   def isIssueResolved(issue: Issue): Boolean = DB localTx { implicit session =>
-    val optionalResolved = sql"""
+    sql"""
       select resolved from issue where id = ${issue.id}
       """
       .map(rs => rs.string("resolved"))
       .single()
-      optionalResolved.fold(false)(resolved => resolved != issue.resolved)
+      .fold(false)(resolved => resolved != issue.resolved)
   }
 
   def listFaults(): List[Fault] = DB readOnly { implicit session =>
