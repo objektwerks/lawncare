@@ -8,7 +8,8 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import lawncare.{Context, Model, Property}
 import lawncare.dialog.{AccountDialog, FaultsDialog, PropertyDialog}
 
-final class PropertiesPane(context: Context, model: Model) extends VBox:
+final class PropertiesPane(context: Context,
+                           model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
