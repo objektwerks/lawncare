@@ -89,12 +89,12 @@ object Validator:
   extension (command: Command)
     def isValid: Boolean =
       command match
-        case register @ Register(_)                => register.isValid
-        case login @ Login(_, _)                   => login.isValid
-        case listProperties @ ListProperties(_, _) => listProperties.isValid
-        case saveProperty @ SaveProperty(_, _)     => saveProperty.isValid
-        case listSessions @ ListSessions(_, _)     => listSessions.isValid
-        case saveSession @ SaveSession(_, _)       => saveSession.isValid
-        case listIssues @ ListIssues(_, _)         => listIssues.isValid
-        case saveIssue @ SaveIssue(_, _)           => saveIssue.isValid
-        case addFault @ AddFault(_, _)             => addFault.isValid
+        case register: Register             => register.isValid
+        case login: Login                   => login.isValid
+        case listProperties: ListProperties => listProperties.isValid
+        case saveProperty: SaveProperty     => saveProperty.isValid
+        case listSessions: ListSessions     => listSessions.isValid
+        case saveSession: SaveSession       => saveSession.isValid
+        case listIssues: ListIssues         => listIssues.isValid
+        case saveIssue: SaveIssue           => saveIssue.isValid
+        case addFault: AddFault             => addFault.isValid
