@@ -21,7 +21,7 @@ final case class Account(id: Long = 0,
                          license: String = UUID.randomUUID.toString,
                          email: String = "",
                          pin: String = Pin.newInstance,
-                         activated: String = Entity.now) extends Entity
+                         activated: String = Entity.now) extends Entity derives CanEqual
 
 object Account:
   val empty = Account(license = "", email = "", pin = "")
