@@ -30,7 +30,7 @@ object Account:
 final case class Property(id: Long = 0,
                           accountId: Long,
                           location: String,
-                          added: String = Entity.now) extends Entity:
+                          added: String = Entity.now) extends Entity derives CanEqual:
   val locationProperty = ObjectProperty[String](this, "location", location)
   val property = this
 
