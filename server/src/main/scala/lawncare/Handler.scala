@@ -18,11 +18,13 @@ final class Handler(dispatcher: Dispatcher,
 
     val event = dispatcher.dispatch(command)
     logger.info(s"*** Handler event: $event")
+
     event match
       case fault @ Fault(_, _) =>
         logger.error(s"*** Handler fault: $fault")
         store.addFault(fault)
       case _ =>
+    
     val eventJson = writeToString[Event](event)
     logger.info(s"*** Handler event json: $eventJson")
 
