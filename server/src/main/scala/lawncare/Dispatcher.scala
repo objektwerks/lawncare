@@ -13,10 +13,10 @@ final class Dispatcher(store: Store,
                        emailer: Emailer):
   def dispatch(command: Command): Event =
     command.isValid match
-      case false => Fault(s"Invalid command: $command")
+      case false => addFault( Fault(s"Invalid command: $command") )
       case true =>
         isAuthorized(command) match
-          case Unauthorized(cause) => Fault(cause)
+          case Unauthorized(cause) => addFault( Fault(cause) )
           case Authorized =>
             command match
               case Register(emailAddress)       => register(emailAddress)
