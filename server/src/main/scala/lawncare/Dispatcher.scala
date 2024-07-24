@@ -29,7 +29,7 @@ final class Dispatcher(store: Store,
               case SaveIssue(license, issue)    => saveIssue(license, issue)
               case AddFault(_, fault)           => addFault(fault)
 
-  def isAuthorized(command: Command): Security =
+  private def isAuthorized(command: Command): Security =
     command match
       case license: License =>
         Try {
