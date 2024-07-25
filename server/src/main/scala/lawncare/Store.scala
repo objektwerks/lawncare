@@ -20,16 +20,16 @@ object Store:
       .expireAfterWrite(expireAfter)
       .build[String, String]()
 
-final class Store(config: Config,
-                  cache: Cache[String, String]) extends LazyLogging:
-  private val dataSource: DataSource = {
-    val ds = new HikariDataSource()
+  def dataSource(config: Config): DataSource =
+    val ds = HikariDataSource()
     ds.setDataSourceClassName(config.getString("db.driverClassName"))
     ds.addDataSourceProperty("url", config.getString("db.url"))
     ds.addDataSourceProperty("user", config.getString("db.user"))
     ds.addDataSourceProperty("password", config.getString("db.password"))
     ds
-  }
+
+final class Store(cache: Cache[String, String],
+                  dataSource: DataSource) extends LazyLogging:
   ConnectionPool.singleton(new DataSourceConnectionPool(dataSource))
 
   def register(account: Account): Account = addAccount(account)
