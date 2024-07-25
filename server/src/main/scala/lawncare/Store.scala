@@ -22,7 +22,7 @@ object Store:
 
   def dataSource(config: Config): DataSource =
     val ds = HikariDataSource()
-    ds.setDataSourceClassName(config.getString("db.driverClassName"))
+    ds.setDataSourceClassName(config.getString("db.driver"))
     ds.addDataSourceProperty("url", config.getString("db.url"))
     ds.addDataSourceProperty("user", config.getString("db.user"))
     ds.addDataSourceProperty("password", config.getString("db.password"))
