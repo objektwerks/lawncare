@@ -84,132 +84,144 @@ final class Store(cache: Cache[String, String],
     }
     account.copy(id = id)
 
-  def listProperties(accountId: Long): List[Property] = DB readOnly { implicit session =>
-    sql"select * from property where account_id = $accountId order by added"
-      .map(rs =>
-        Property(
-          rs.long("id"),
-          rs.long("account_id"),
-          rs.string("location"), 
-          rs.string("added")
+  def listProperties(accountId: Long): List[Property] =
+    DB readOnly { implicit session =>
+      sql"select * from property where account_id = $accountId order by added"
+        .map(rs =>
+          Property(
+            rs.long("id"),
+            rs.long("account_id"),
+            rs.string("location"), 
+            rs.string("added")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addProperty(property: Property): Long = DB localTx { implicit session =>
-    sql"""
-      insert into property(account_id, location, added) values(${property.accountId}, ${property.location}, ${property.added})
-      """
-      .updateAndReturnGeneratedKey()
-  }
+  def addProperty(property: Property): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into property(account_id, location, added) values(${property.accountId}, ${property.location}, ${property.added})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateProperty(property: Property): Long = DB localTx { implicit session =>
-    sql"""
-      update property set location = ${property.location}
-      where id = ${property.id}
-      """
-      .update()
-    property.id
-  }
+  def updateProperty(property: Property): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update property set location = ${property.location}
+        where id = ${property.id}
+        """
+        .update()
+      property.id
+    }
 
-  def listSessions(propertyId: Long): List[Session] = DB readOnly { implicit session =>
-    sql"select * from session where property_id = $propertyId order by occurred desc"
-      .map(rs =>
-        Session(
-          rs.long("id"),
-          rs.long("property_id"),
-          rs.boolean("mowed"),
-          rs.boolean("edged"),
-          rs.boolean("trimmed"),
-          rs.boolean("blowed"),
-          rs.boolean("fertilized"),
-          rs.boolean("pesticided"),
-          rs.boolean("weeded"),
-          rs.boolean("watered"),
-          rs.boolean("repaired"),
-          rs.string("note"),
-          rs.string("occurred")
+  def listSessions(propertyId: Long): List[Session] =
+    DB readOnly { implicit session =>
+      sql"select * from session where property_id = $propertyId order by occurred desc"
+        .map(rs =>
+          Session(
+            rs.long("id"),
+            rs.long("property_id"),
+            rs.boolean("mowed"),
+            rs.boolean("edged"),
+            rs.boolean("trimmed"),
+            rs.boolean("blowed"),
+            rs.boolean("fertilized"),
+            rs.boolean("pesticided"),
+            rs.boolean("weeded"),
+            rs.boolean("watered"),
+            rs.boolean("repaired"),
+            rs.string("note"),
+            rs.string("occurred")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addSession(sess: Session): Long = DB localTx { implicit session =>
-    sql"""
-      insert into session(property_id, mowed, edged, trimmed, blowed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
-      values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.trimmed}, ${sess.blowed}, ${sess.fertilized}, ${sess.pesticided},
-      ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occurred})
-      """
-      .updateAndReturnGeneratedKey()
-  }
+  def addSession(sess: Session): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into session(property_id, mowed, edged, trimmed, blowed, fertilized, pesticided, weeded, watered, repaired, note, occurred)
+        values(${sess.propertyId}, ${sess.mowed}, ${sess.edged}, ${sess.trimmed}, ${sess.blowed}, ${sess.fertilized}, ${sess.pesticided},
+        ${sess.weeded}, ${sess.watered}, ${sess.repaired}, ${sess.note}, ${sess.occurred})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateSession(sess: Session): Long = DB localTx { implicit session =>
-    sql"""
-      update session set mowed = ${sess.mowed}, edged = ${sess.edged}, trimmed = ${sess.trimmed}, blowed = ${sess.blowed},
-      fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
-      repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occurred} where id = ${sess.id}
-      """
-      .update()
-    sess.id
-  }
+  def updateSession(sess: Session): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update session set mowed = ${sess.mowed}, edged = ${sess.edged}, trimmed = ${sess.trimmed}, blowed = ${sess.blowed},
+        fertilized = ${sess.fertilized}, pesticided = ${sess.pesticided}, weeded = ${sess.weeded}, watered = ${sess.watered},
+        repaired = ${sess.repaired}, note = ${sess.note}, occurred = ${sess.occurred} where id = ${sess.id}
+        """
+        .update()
+      sess.id
+    }
 
-  def listIssues(propertyId: Long): List[Issue] = DB readOnly { implicit session =>
-    sql"select * from issue where property_id = $propertyId order by reported desc"
-      .map(rs =>
-        Issue(
-          rs.long("id"),
-          rs.long("property_id"),
-          rs.string("report"),
-          rs.string("resolved"),
-          rs.string("reported"),
-          rs.string("resolved")
+  def listIssues(propertyId: Long): List[Issue] =
+    DB readOnly { implicit session =>
+      sql"select * from issue where property_id = $propertyId order by reported desc"
+        .map(rs =>
+          Issue(
+            rs.long("id"),
+            rs.long("property_id"),
+            rs.string("report"),
+            rs.string("resolved"),
+            rs.string("reported"),
+            rs.string("resolved")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addIssue(issue: Issue): Long = DB localTx { implicit session =>
-    sql"""
-      insert into issue(property_id, report, resolution, reported, resolved)
-      values(${issue.propertyId}, ${issue.report}, ${issue.resolution}, ${issue.reported}, ${issue.resolved})
-      """
-      .updateAndReturnGeneratedKey()
-  }
+  def addIssue(issue: Issue): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into issue(property_id, report, resolution, reported, resolved)
+        values(${issue.propertyId}, ${issue.report}, ${issue.resolution}, ${issue.reported}, ${issue.resolved})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateIssue(issue: Issue): Long = DB localTx { implicit session =>
-    sql"""
-      update issue set report = ${issue.report}, resolution = ${issue.resolution}, reported = ${issue.reported},
-      resolved = ${issue.resolved} where id = ${issue.id}
-      """
-      .update()
-    issue.id
-  }
+  def updateIssue(issue: Issue): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update issue set report = ${issue.report}, resolution = ${issue.resolution}, reported = ${issue.reported},
+        resolved = ${issue.resolved} where id = ${issue.id}
+        """
+        .update()
+      issue.id
+    }
 
-  def isIssueResolved(issue: Issue): Boolean = DB localTx { implicit session =>
-    sql"""
-      select resolved from issue where id = ${issue.id}
-      """
-      .map(rs => rs.string("resolved"))
-      .single()
-      .fold(false)(resolved => resolved != issue.resolved)
-  }
+  def isIssueResolved(issue: Issue): Boolean =
+    DB localTx { implicit session =>
+      sql"""
+        select resolved from issue where id = ${issue.id}
+        """
+        .map(rs => rs.string("resolved"))
+        .single()
+        .fold(false)(resolved => resolved != issue.resolved)
+    }
 
-  def listFaults(): List[Fault] = DB readOnly { implicit session =>
-    sql"select * from fault order by occurred desc"
-      .map(rs =>
-        Fault(
-          rs.string("cause"),
-          rs.string("occurred")
+  def listFaults(): List[Fault] =
+    DB readOnly { implicit session =>
+      sql"select * from fault order by occurred desc"
+        .map(rs =>
+          Fault(
+            rs.string("cause"),
+            rs.string("occurred")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addFault(fault: Fault): Fault = DB localTx { implicit session =>
-    sql"""
-      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
-      """
-      .update()
-      fault
-  }
+  def addFault(fault: Fault): Fault =
+    DB localTx { implicit session =>
+      sql"""
+        insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+        """
+        .update()
+        fault
+    }
