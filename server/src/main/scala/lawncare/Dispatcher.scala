@@ -48,7 +48,7 @@ final class Dispatcher(store: Store,
   private def register(email: String): Event =
     Try {
       val account = Account(email = email)
-      val message = s"<p>Your new pin is: <b>${account.pin}</b></p><p>Welcome aboard!</p>"
+      val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
       send(account.email, message)
       Registered( store.register(account) )
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
