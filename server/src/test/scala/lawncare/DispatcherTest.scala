@@ -24,7 +24,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
   var testSession = Session(propertyId = 0)
   var testIssue = Issue(propertyId = 0, report = "sprinkler broken")
 
-  test("integration"):
+  test("dispatcher"):
     register
     login
 
