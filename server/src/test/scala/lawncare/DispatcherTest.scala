@@ -9,7 +9,7 @@ import scala.sys.process.Process
 
 import Validator.*
 
-final class IntegrationTest extends AnyFunSuite with Matchers:
+final class DispatcherTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d lawncare -f ddl.sql").run().exitValue()
   exitCode shouldBe 0
 
