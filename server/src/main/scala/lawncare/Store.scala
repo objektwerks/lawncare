@@ -170,7 +170,7 @@ final class Store(cache: Cache[String, String],
             rs.long("id"),
             rs.long("property_id"),
             rs.string("report"),
-            rs.string("resolved"),
+            rs.string("resolution"),
             rs.string("reported"),
             rs.string("resolved")
           )
