@@ -9,8 +9,8 @@ import scala.util.control.NonFatal
 
 import Validator.*
 
-final class Dispatcher(store: Store, emailer: Emailer)(using IO):
-  def dispatch(command: Command): Event =
+final class Dispatcher(store: Store, emailer: Emailer):
+  def dispatch(command: Command)(using IO): Event =
     command.isValid match
       case false => addFault( Fault(s"Invalid command: $command") )
       case true =>
@@ -28,7 +28,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
               case SaveIssue(license, issue)    => saveIssue(license, issue)
               case AddFault(_, fault)           => addFault(fault)
 
-  private def isAuthorized(command: Command): Security =
+  private def isAuthorized(command: Command)(using IO): Security =
     command match
       case license: License =>
         Try:
@@ -46,7 +46,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     val recipients = List(email)
     emailer.send(recipients, message)
 
-  private def register(email: String): Event =
+  private def register(email: String)(using IO): Event =
     Try:
       supervised:
         val account = Account(email = email)
@@ -57,7 +57,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}")
     .get
 
-  private def login(email: String, pin: String): Event =
+  private def login(email: String, pin: String)(using IO): Event =
     Try:
       supervised:
         retry( RetryConfig.delay(1, 100.millis) )( store.login(email, pin) )
@@ -68,7 +68,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
         else Fault(s"Login failed for email address: $email and pin: $pin")
     )
 
-  private def listProperties(accountId: Long): Event =
+  private def listProperties(accountId: Long)(using IO): Event =
     Try:
       PropertiesListed(
         supervised:
@@ -78,7 +78,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("List properties failed:", error)
     .get
 
-  private def saveProperty(property: Property): Event =
+  private def saveProperty(property: Property)(using IO): Event =
     Try:
       PropertySaved(
         supervised:
@@ -89,7 +89,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("Save property failed:", error)
     .get
 
-  private def listSessions(propertyId: Long): Event =
+  private def listSessions(propertyId: Long)(using IO): Event =
     Try:
       SessionsListed(
         supervised:
@@ -99,7 +99,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("List sessions failed:", error)
     .get
 
-  private def saveSession(session: Session): Event =
+  private def saveSession(session: Session)(using IO): Event =
     Try:
       SessionSaved(
         supervised:
@@ -110,7 +110,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("Save session failed:", error)
     .get
 
-  private def listIssues(propertyId: Long): Event =
+  private def listIssues(propertyId: Long)(using IO): Event =
     Try:
       IssuesListed(
         supervised:
@@ -120,7 +120,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("List issues failed:", error)
     .get
 
-  private def saveIssue(license: String, issue: Issue): Event =
+  private def saveIssue(license: String, issue: Issue)(using IO): Event =
     Try:
       IssueSaved(
         supervised:
@@ -138,7 +138,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault("Save issue failed:", error)
     .get
 
-  private def addFault(fault: Fault): Event =
+  private def addFault(fault: Fault)(using IO): Event =
     Try:
       supervised:
         retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
