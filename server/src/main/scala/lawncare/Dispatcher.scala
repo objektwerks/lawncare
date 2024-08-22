@@ -100,13 +100,14 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     .get
 
   private def saveSession(session: Session): Event =
-    Try {
+    Try:
       SessionSaved(
-        if session.id == 0 then store.addSession(session)
-        else store.updateSession(session)
+        if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
+        else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
       )
-    }.recover { case NonFatal(error) => Fault("Save session failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save session failed:", error)
+    .get
 
   private def listIssues(propertyId: Long): Event =
     Try {
