@@ -1,7 +1,9 @@
 package lawncare
 
-import ox.IO
+import ox.{IO, supervised}
+import ox.resilience.{retry, RetryConfig}
 
+import scala.concurrent.duration.*
 import scala.util.Try
 import scala.util.control.NonFatal
 
@@ -29,16 +31,18 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
   private def isAuthorized(command: Command): Security =
     command match
       case license: License =>
-        Try {
-          if store.isAuthorized(license.license) then Authorized
-          else Unauthorized(s"Unauthorized: $command")
-        }.recover {
+        Try:
+          supervised:
+            retry( RetryConfig.delay(1, 100.millis) )(
+              if store.isAuthorized(license.license) then Authorized
+              else Unauthorized(s"Unauthorized: $command")
+            )
+        .recover:
           case NonFatal(error) => Unauthorized(s"Unauthorized: $command, cause: $error")
-        }.get
+        .get
       case Register(_) | Login(_, _) => Authorized
 
-  private def send(email: String,
-                   message: String): Unit =
+  private def send(email: String, message: String): Unit =
     val recipients = List(email)
     emailer.send(recipients, message)
 
