@@ -137,8 +137,10 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     .get
 
   private def addFault(fault: Fault): Event =
-    Try {
-      store.addFault(fault)
-      FaultAdded()
-    }.recover { case NonFatal(error) => Fault("Add fault failed:", error) }
-     .get
+    Try:
+      supervised:
+        retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
+        FaultAdded()
+    .recover:
+      case NonFatal(error) => Fault("Add fault failed:", error)
+    .get
