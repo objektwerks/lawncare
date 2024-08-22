@@ -110,10 +110,13 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     .get
 
   private def listIssues(propertyId: Long): Event =
-    Try {
-      IssuesListed( store.listIssues(propertyId) )
-    }.recover { case NonFatal(error) => Fault("List issues failed:", error) }
-     .get
+    Try:
+      IssuesListed(
+          retry( RetryConfig.delay(1, 100.millis) )( store.listIssues(propertyId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List issues failed:", error)
+    .get
 
   private def saveIssue(license: String,
                         issue: Issue): Event =
