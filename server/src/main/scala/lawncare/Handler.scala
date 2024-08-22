@@ -7,9 +7,8 @@ import io.helidon.webserver.http.{Handler => WebHandler, ServerRequest, ServerRe
 
 import ox.IO
 
-final class Handler(dispatcher: Dispatcher)(using IO) extends WebHandler with LazyLogging:
-  override def handle(request: ServerRequest,
-                      response: ServerResponse): Unit =
+final class Handler(dispatcher: Dispatcher) extends WebHandler with LazyLogging:
+  override def handle(request: ServerRequest, response: ServerResponse)(using IO): Unit =
     val commandJson = request.content.as(classOf[String])
     logger.info(s"*** Handler command json: $commandJson")
 
