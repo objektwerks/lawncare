@@ -79,13 +79,15 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     .get
 
   private def saveProperty(property: Property): Event =
-    Try {
+    Try:
       PropertySaved(
-        if property.id == 0 then store.addProperty(property)
-        else store.updateProperty(property)
+        supervised:
+          if property.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addProperty(property) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updateProperty(property) )
       )
-    }.recover { case NonFatal(error) => Fault("Save property failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save property failed:", error)
+    .get
 
   private def listSessions(propertyId: Long): Event =
     Try {
