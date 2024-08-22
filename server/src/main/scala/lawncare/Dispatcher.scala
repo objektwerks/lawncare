@@ -10,23 +10,24 @@ import scala.util.control.NonFatal
 import Validator.*
 
 final class Dispatcher(store: Store, emailer: Emailer):
-  def dispatch(command: Command)(using IO): Event =
-    command.isValid match
-      case false => addFault( Fault(s"Invalid command: $command") )
-      case true =>
-        isAuthorized(command) match
-          case Unauthorized(cause) => addFault( Fault(cause) )
-          case Authorized =>
-            command match
-              case Register(emailAddress)       => register(emailAddress)
-              case Login(emailAddress, pin)     => login(emailAddress, pin)
-              case ListProperties(_, accountId) => listProperties(accountId)
-              case SaveProperty(_, property)    => saveProperty(property)
-              case ListSessions(_, propertyId)  => listSessions(propertyId)
-              case SaveSession(_, session)      => saveSession(session)
-              case ListIssues(_, propertyId)    => listIssues(propertyId)
-              case SaveIssue(license, issue)    => saveIssue(license, issue)
-              case AddFault(_, fault)           => addFault(fault)
+  def dispatch(command: Command): Event =
+    IO.unsafe:
+      command.isValid match
+        case false => addFault( Fault(s"Invalid command: $command") )
+        case true =>
+          isAuthorized(command) match
+            case Unauthorized(cause) => addFault( Fault(cause) )
+            case Authorized =>
+              command match
+                case Register(emailAddress)       => register(emailAddress)
+                case Login(emailAddress, pin)     => login(emailAddress, pin)
+                case ListProperties(_, accountId) => listProperties(accountId)
+                case SaveProperty(_, property)    => saveProperty(property)
+                case ListSessions(_, propertyId)  => listSessions(propertyId)
+                case SaveSession(_, session)      => saveSession(session)
+                case ListIssues(_, propertyId)    => listIssues(propertyId)
+                case SaveIssue(license, issue)    => saveIssue(license, issue)
+                case AddFault(_, fault)           => addFault(fault)
 
   private def isAuthorized(command: Command)(using IO): Security =
     command match
