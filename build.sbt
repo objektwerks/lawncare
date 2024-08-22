@@ -132,6 +132,7 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "io.helidon.webserver" % "helidon-webserver" % helidonVersion,
+        "com.softwaremill.ox" %% "core" % "0.3.3",
         "org.scalikejdbc" %% "scalikejdbc" % "4.3.1",
         "com.zaxxer" % "HikariCP" % "5.1.0" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.7.3",
