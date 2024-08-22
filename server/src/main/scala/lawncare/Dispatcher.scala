@@ -1,13 +1,14 @@
 package lawncare
 
+import ox.IO
+
 import scala.util.Try
 import scala.util.control.NonFatal
 
 import Validator.*
 
-final class Dispatcher(store: Store,
-                       emailer: Emailer):
-  def dispatch(command: Command): Event =
+final class Dispatcher(store: Store, emailer: Emailer):
+  def dispatch(command: Command)(using IO): Event =
     command.isValid match
       case false => addFault( Fault(s"Invalid command: $command") )
       case true =>
