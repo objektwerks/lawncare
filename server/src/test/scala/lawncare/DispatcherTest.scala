@@ -4,6 +4,8 @@ import com.typesafe.config.ConfigFactory
 
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
+import ox.supervised
+import ox.IO.globalForTesting.given
 
 import scala.sys.process.Process
 
@@ -25,18 +27,19 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
   var testIssue = Issue(propertyId = 0, report = "sprinkler broken")
 
   test("dispatcher"):
-    register
-    login
+    supervised:
+      register
+      login
 
-    addProperty
-    updateProperty
-    listProperties
+      addProperty
+      updateProperty
+      listProperties
 
-    addSession
-    updateSession
-    listSessions
+      addSession
+      updateSession
+      listSessions
 
-    fault
+      fault
 
   def register: Unit =
     val register = Register(config.getString("email.sender"))
