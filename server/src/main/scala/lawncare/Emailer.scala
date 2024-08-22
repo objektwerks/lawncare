@@ -26,8 +26,7 @@ private final class Emailer(host: String,
     .auth(sender, password)
     .buildSmtpMailServer
 
-  private def sendEmail(recipients: List[String],
-                        message: String): Unit =
+  private def sendEmail(recipients: List[String], message: String): Unit =
     Using( smtpServer.createSession ) { session =>
       val email = Email.create
         .from(sender)
