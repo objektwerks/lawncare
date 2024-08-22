@@ -5,7 +5,9 @@ import com.typesafe.scalalogging.LazyLogging
 
 import io.helidon.webserver.http.{Handler => WebHandler, ServerRequest, ServerResponse}
 
-final class Handler(dispatcher: Dispatcher) extends WebHandler with LazyLogging:
+import ox.IO
+
+final class Handler(dispatcher: Dispatcher)(using IO) extends WebHandler with LazyLogging:
   override def handle(request: ServerRequest,
                       response: ServerResponse): Unit =
     val commandJson = request.content.as(classOf[String])
