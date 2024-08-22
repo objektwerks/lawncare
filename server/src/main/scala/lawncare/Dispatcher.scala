@@ -124,13 +124,15 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     Try:
       IssueSaved(
         supervised:
-          if issue.id == 0 then store.addIssue(issue)
-          else
-            if store.isIssueResolved(issue) then
-              store
-                .getAccountEmail(license)
-                .fold(())(email => sendEmail(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
-            store.updateIssue(issue)
+          retry( RetryConfig.delay(1, 600.millis) ){
+            if issue.id == 0 then store.addIssue(issue)
+            else
+              if store.isIssueResolved(issue) then
+                store
+                  .getAccountEmail(license)
+                  .fold(())(email => sendEmail(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
+              store.updateIssue(issue)
+          }
       )
     .recover:
       case NonFatal(error) => Fault("Save issue failed:", error)
