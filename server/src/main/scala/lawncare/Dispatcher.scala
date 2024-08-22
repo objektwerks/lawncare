@@ -57,9 +57,11 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
       case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}")
     .get
 
-  private def login(email: String,
-                    pin: String): Event =
-    Try { store.login(email, pin) }.fold(
+  private def login(email: String, pin: String): Event =
+    Try:
+      supervised:
+        retry( RetryConfig.delay(1, 100.millis) )( store.login(email, pin) )
+    .fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
         if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
