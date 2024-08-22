@@ -42,18 +42,20 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
         .get
       case Register(_) | Login(_, _) => Authorized
 
-  private def send(email: String, message: String): Unit =
+  private def sendEmail(email: String, message: String): Unit =
     val recipients = List(email)
     emailer.send(recipients, message)
 
   private def register(email: String): Event =
-    Try {
-      val account = Account(email = email)
-      val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-      send(account.email, message)
-      Registered( store.register(account) )
-    }.recover { case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}") }
-     .get
+    Try:
+      supervised:
+        val account = Account(email = email)
+        val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
+        retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.email, message) )
+        Registered( store.register(account) )
+    .recover:
+      case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}")
+    .get
 
   private def login(email: String,
                     pin: String): Event =
@@ -109,7 +111,7 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
           if store.isIssueResolved(issue) then
             store
               .getAccountEmail(license)
-              .fold(())(email => send(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
+              .fold(())(email => sendEmail(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
           store.updateIssue(issue)
       )
     }.recover { case NonFatal(error) => Fault("Save issue failed:", error) }
