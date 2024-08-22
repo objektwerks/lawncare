@@ -69,10 +69,14 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     )
 
   private def listProperties(accountId: Long): Event =
-    Try {
-      PropertiesListed(store.listProperties(accountId))
-    }.recover { case NonFatal(error) => Fault("List properties failed:", error) }
-     .get
+    Try:
+      PropertiesListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listProperties(accountId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List properties failed:", error)
+    .get
 
   private def saveProperty(property: Property): Event =
     Try {
