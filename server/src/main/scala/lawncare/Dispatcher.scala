@@ -90,10 +90,14 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
     .get
 
   private def listSessions(propertyId: Long): Event =
-    Try {
-      SessionsListed( store.listSessions(propertyId) )
-    }.recover { case NonFatal(error) => Fault("List sessions failed:", error) }
-     .get
+    Try:
+      SessionsListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listSessions(propertyId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List sessions failed:", error)
+    .get
 
   private def saveSession(session: Session): Event =
     Try {
