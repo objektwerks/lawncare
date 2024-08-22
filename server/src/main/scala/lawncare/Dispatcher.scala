@@ -102,8 +102,9 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
   private def saveSession(session: Session): Event =
     Try:
       SessionSaved(
-        if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
-        else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
+        supervised:
+          if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
+          else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
       )
     .recover:
       case NonFatal(error) => Fault("Save session failed:", error)
@@ -112,26 +113,28 @@ final class Dispatcher(store: Store, emailer: Emailer)(using IO):
   private def listIssues(propertyId: Long): Event =
     Try:
       IssuesListed(
+        supervised:
           retry( RetryConfig.delay(1, 100.millis) )( store.listIssues(propertyId) )
       )
     .recover:
       case NonFatal(error) => Fault("List issues failed:", error)
     .get
 
-  private def saveIssue(license: String,
-                        issue: Issue): Event =
-    Try {
+  private def saveIssue(license: String, issue: Issue): Event =
+    Try:
       IssueSaved(
-        if issue.id == 0 then store.addIssue(issue)
-        else
-          if store.isIssueResolved(issue) then
-            store
-              .getAccountEmail(license)
-              .fold(())(email => sendEmail(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
-          store.updateIssue(issue)
+        supervised:
+          if issue.id == 0 then store.addIssue(issue)
+          else
+            if store.isIssueResolved(issue) then
+              store
+                .getAccountEmail(license)
+                .fold(())(email => sendEmail(email, s"Issue resolved: [${issue.id}] : ${issue.report}"))
+            store.updateIssue(issue)
       )
-    }.recover { case NonFatal(error) => Fault("Save issue failed:", error) }
-     .get
+    .recover:
+      case NonFatal(error) => Fault("Save issue failed:", error)
+    .get
 
   private def addFault(fault: Fault): Event =
     Try {
