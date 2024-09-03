@@ -115,7 +115,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List issues failed:", error)
 
   private def saveIssue(license: String, issue: Issue)(using IO): Event =
-    Try:
+    try
       IssueSaved(
         supervised:
           retry( RetryConfig.delay(1, 600.millis) ){
@@ -128,9 +128,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
               store.updateIssue(issue)
           }
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("Save issue failed:", error)
-    .get
 
   private def addFault(fault: Fault)(using IO): Event =
     Try:
