@@ -87,14 +87,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("Save property failed:", error)
 
   private def listSessions(propertyId: Long)(using IO): Event =
-    Try:
+    try
       SessionsListed(
         supervised:
           retry( RetryConfig.delay(1, 100.millis) )( store.listSessions(propertyId) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("List sessions failed:", error)
-    .get
 
   private def saveSession(session: Session)(using IO): Event =
     Try:
