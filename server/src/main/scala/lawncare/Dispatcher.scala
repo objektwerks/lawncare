@@ -47,15 +47,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
     emailer.send(recipients, message)
 
   private def register(email: String)(using IO): Event =
-    Try:
+    try
       supervised:
         val account = Account(email = email)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
         retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.email, message) )
         Registered( store.register(account) )
-    .recover:
+    catch
       case NonFatal(error) => Fault(s"Registration failed for: $email, because: ${error.getMessage}")
-    .get
 
   private def login(email: String, pin: String)(using IO): Event =
     Try:
