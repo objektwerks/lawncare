@@ -54,7 +54,7 @@ lazy val lawncare = (project in file("."))
 // End: Assembly Tasks
 
 // Begin: Assembly
-assemblyJarName := s"lawncare-${version.value}.jar"
+assemblyJarName := s"lawncare-${common.version.value}.jar"
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
