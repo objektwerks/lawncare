@@ -1,6 +1,6 @@
 Lawncare
 --------
-Lawn care app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, Helidon, Ox, PostgreSql and Scala 3.
+Lawn care app using ScalaFx, ScalikeJdbc, Jsoniter, JoddMail, Helidon, Ox, PostgreSql, HikariCP and Scala 3.
 
 Todo
 ----
