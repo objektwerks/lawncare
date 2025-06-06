@@ -1,7 +1,8 @@
 package lawncare
 
 import ox.supervised
-import ox.resilience.{retry, RetryConfig}
+import ox.resilience.retry
+import ox.scheduling.Schedule
 
 import scala.concurrent.duration.*
 import scala.util.Try
@@ -33,7 +34,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case license: License =>
         try
           supervised:
-            retry( RetryConfig.delay(1, 100.millis) )(
+            retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )(
               if store.isAuthorized(license.license) then Authorized
               else Unauthorized(s"Unauthorized: $command")
             )
@@ -50,7 +51,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       supervised:
         val account = Account(email = email)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-        val result = retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.email, message) )
+        val result = retry( Schedule.fixedInterval(600.millis).maxRepeats(1) )( sendEmail(account.email, message) )
         if result then
           Registered( store.register(account) )
         else
@@ -61,7 +62,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def login(email: String, pin: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.login(email, pin) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.login(email, pin) )
     .fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
@@ -73,7 +74,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PropertiesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listProperties(accountId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listProperties(accountId) )
       )
     catch
       case NonFatal(error) => Fault("List properties failed:", error)
@@ -82,8 +83,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PropertySaved(
         supervised:
-          if property.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addProperty(property) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updateProperty(property) )
+          if property.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addProperty(property) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateProperty(property) )
       )
     catch
       case NonFatal(error) => Fault("Save property failed:", error)
@@ -92,7 +93,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       SessionsListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listSessions(propertyId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listSessions(propertyId) )
       )
     catch
       case NonFatal(error) => Fault("List sessions failed:", error)
@@ -101,8 +102,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       SessionSaved(
         supervised:
-          if session.id == 0 then retry( RetryConfig.delay(1, 100.millis) )( store.addSession(session) )
-          else retry( RetryConfig.delay(1, 100.millis) )( store.updateSession(session) )
+          if session.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addSession(session) )
+          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateSession(session) )
       )
     catch
       case NonFatal(error) => Fault("Save session failed:", error)
@@ -111,7 +112,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       IssuesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listIssues(propertyId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listIssues(propertyId) )
       )
     catch
       case NonFatal(error) => Fault("List issues failed:", error)
@@ -136,7 +137,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def addFault(fault: Fault): Event =
     try
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addFault(fault) )
         FaultAdded()
     catch
       case NonFatal(error) => Fault("Add fault failed:", error)
