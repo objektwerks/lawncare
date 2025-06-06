@@ -121,7 +121,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       IssueSaved(
         supervised:
-          retry( RetryConfig.delay(1, 600.millis) ){
+          retry( Schedule.fixedInterval(600.millis).maxRepeats(1) ){
             if issue.id == 0 then store.addIssue(issue)
             else
               if store.isIssueResolved(issue) then
