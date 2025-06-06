@@ -59,19 +59,11 @@ Package Server
 
 Client Assembly
 ---------------
->To build for a "mac", "m1', "win" or "linux" os target:
-1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
+1. sbt clean test assembly copyAssemblyJar
 
 Execute Client
 --------------
->To execute an assembled jar locally:
-1. java -jar .assembly/lawncare-mac-0.22.jar
-2. java -jar .assembly/lawncare-m1-0.22.jar
-3. java -jar .assembly/lawncare-win-0.22.jar
-4. java -jar .assembly/lawncare-linux-0.22.jar
+1. java -jar .assembly/lawncare-$version.jar ( or double-click executable jar )
 
 Deploy
 ------
