@@ -84,7 +84,7 @@ final class IssuesPane(context: Context,
 
   def add(): Unit =
     IssueDialog(context, Issue(propertyId = model.selectedPropertyId.value)).showAndWait() match
-      case Some(issue: Issue) => model.add(0, issue) {
+      case Some(issue: Issue) => model.add(issue) {
         tableView.selectionModel().select(0)
       }
       case _ =>
