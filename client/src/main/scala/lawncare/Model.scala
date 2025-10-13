@@ -133,7 +133,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(selectedIndex: Int, session: Session)(runLast: => Unit): Unit =
+  def add(session: Session)(runLast: => Unit): Unit =
     fetcher.fetch(
       SaveSession(objectAccount.get.license, session),
       (event: Event) => event match
