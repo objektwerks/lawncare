@@ -85,7 +85,7 @@ final class PropertiesPane(context: Context,
 
   def add(): Unit =
     PropertyDialog(context, Property(accountId = model.objectAccount.get.id, location = "")).showAndWait() match
-      case Some(property: Property) => model.add(0, property) {
+      case Some(property: Property) => model.add(property) {
         tableView.selectionModel().select(property.copy(id = model.selectedPropertyId.value))
       }
       case _ =>
