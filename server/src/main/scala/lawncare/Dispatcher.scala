@@ -74,7 +74,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       PropertiesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listProperties(accountId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listProperties(accountId) )
       )
     catch
       case NonFatal(error) => Fault("List properties failed:", error)
