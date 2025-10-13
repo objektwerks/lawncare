@@ -123,7 +123,7 @@ final class SessionsPane(context: Context,
 
   def add(): Unit =
     SessionDialog(context, Session(propertyId = model.selectedPropertyId.value)).showAndWait() match
-      case Some(session: Session) => model.add(0, session) {
+      case Some(session: Session) => model.add(session) {
         tableView.selectionModel().select(0)
       }
       case _ =>
