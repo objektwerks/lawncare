@@ -84,7 +84,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       PropertySaved(
         supervised:
           if property.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addProperty(property) )
-          else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateProperty(property) )
+          else retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateProperty(property) )
       )
     catch
       case NonFatal(error) => Fault("Save property failed:", error)
