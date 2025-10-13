@@ -62,7 +62,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def login(email: String, pin: String): Event =
     Try:
       supervised:
-        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.login(email, pin) )
+        retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.login(email, pin) )
     .fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
