@@ -102,7 +102,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       SessionSaved(
         supervised:
-          if session.id == 0 then retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addSession(session) )
+          if session.id == 0 then retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addSession(session) )
           else retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateSession(session) )
       )
     catch
