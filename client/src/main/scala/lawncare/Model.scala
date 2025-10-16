@@ -33,10 +33,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableIssues = ObservableBuffer[Issue]()
   val observableFaults = ObservableBuffer[Fault]()
 
-  observableSessions.onChange { (_, changes) =>
-    logger.info("*** observable sessions onchange event: {}", changes)
-  }
-
   observableIssues.onChange { (_, changes) =>
     logger.info("*** observable issues onchange event: {}", changes)
   }
