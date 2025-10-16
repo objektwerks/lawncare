@@ -188,17 +188,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(issue: Issue)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveIssue(objectAccount.get.license, issue),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save issue", issue, fault)
-        case IssueSaved(id) =>
-          observableIssues += issue.copy(id = id)
-          observableIssues.sort()
-          selectedIssueId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add issue: $issue")
+      fetcher.fetch(
+        SaveIssue(objectAccount.get.license, issue),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add issue", issue, fault)
+          case IssueSaved(id) =>
+            observableIssues.insert(0, issue.copy(id = id))
+            observableIssues.sort()
+            selectedIssueId.set(id)
+            logger.info(s"Added issue: $issue")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, issue: Issue)(runLast: => Unit): Unit =
     fetcher.fetch(
