@@ -96,28 +96,37 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(property: Property)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveProperty(objectAccount.get.license, property),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save property", property, fault)
-        case PropertySaved(id) =>
-          observableProperties += property.copy(id = id)
-          observableProperties.sort()
-          selectedPropertyId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add property: $property")
+      fetcher.fetch(
+        SaveProperty(objectAccount.get.license, property),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add property", property, fault)
+          case PropertySaved(id) =>
+            observableProperties.insert(0, property.copy(id = id))
+            observableProperties.sort()
+            selectedPropertyId.set(id)
+            logger.info(s"Added property: $property")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, property: Property)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      SaveProperty(objectAccount.get.license, property),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.save property", property, fault)
-        case PropertySaved(id) =>
-          observableProperties.update(selectedIndex, property)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"update property from: $selectedIndex to: $property")
+      fetcher.fetch(
+        SaveProperty(objectAccount.get.license, property),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("update property", property, fault)
+          case PropertySaved(id) =>
+            if selectedIndex > -1 then
+              observableProperties.update(selectedIndex, property)
+              logger.info(s"Updated property from: $selectedIndex to: $property")
+              runLast
+            else
+              logger.error(s"Update of property: $property \nfailed due to invalid index: $selectedIndex")
+          case _ => ()
+      )
 
   def sessions(propertyId: Long): Unit =
     fetcher.fetch(
