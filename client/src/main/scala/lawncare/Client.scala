@@ -20,7 +20,7 @@ object Client extends JFXApp3 with LazyLogging:
       title = context.windowTitle
       minWidth = context.windowWidth
       minHeight = context.windowHeight
-      icons.add(context.logo)
+      icons.add(context.iconImage)
 
     stage.hide()
 

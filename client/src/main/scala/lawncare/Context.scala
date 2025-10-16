@@ -76,14 +76,13 @@ final class Context(config: Config):
   val tabSessions = config.getString("tab.sessions")
   val tabIssues = config.getString("tab.issues")
 
-  def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
   def chartImage = loadImageView("/image/chart.png")
   def faultsImage = loadImageView("/image/faults.png")
   def accountImage = loadImageView("/image/account.png")
 
-  def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
+  def iconImage = new Image(Image.getClass.getResourceAsStream("/image/icon.png"))
 
   private def loadImageView(path: String): ImageView = new ImageView:
     image = new Image(Image.getClass.getResourceAsStream(path))
