@@ -7,8 +7,9 @@ import scalafx.scene.layout.{Priority, VBox}
 
 import lawncare.pane.{PropertiesPane, TabbedPane}
 
-final class View(context: Context,
-                 model: Model):
+final class View(context: Context, model: Model):
+  val menu = Menu(context)
+
   val vbox = new VBox:
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
@@ -27,7 +28,7 @@ final class View(context: Context,
   splitPane.setDividerPositions(0.20, 0.80)
   VBox.setVgrow(splitPane, Priority.Always)
 
-  vbox.children = List(splitPane)
+  vbox.children = List(menu, splitPane)
 
   val scene = new Scene:
     root = vbox
