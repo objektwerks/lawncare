@@ -60,7 +60,7 @@ final case class Session(id: Long = 0,
   val weededProperty = ObjectProperty[Boolean](this, "weeded", weeded)
   val wateredProperty = ObjectProperty[Boolean](this, "watered", watered)
   val repairedProperty = ObjectProperty[Boolean](this, "repaired", repaired)
-  val noteProperty = ObjectProperty[String](this, "occurred", occurred)
+  val noteProperty = ObjectProperty[String](this, "note", note)
   val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
   val session = this
 
