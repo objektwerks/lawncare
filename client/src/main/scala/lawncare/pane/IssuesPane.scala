@@ -65,7 +65,7 @@ final class IssuesPane(context: Context,
   VBox.setVgrow(tableView, Priority.Always)
   VBox.setVgrow(tabPane, Priority.Always)
 
-  model.selectedSessionId.onChange { (_, _, _) =>
+  model.selectedPropertyId.onChange { (_, _, _) =>
     addButton.disable = false
   }
 
