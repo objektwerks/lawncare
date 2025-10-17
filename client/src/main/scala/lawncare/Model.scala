@@ -27,6 +27,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   selectedPropertyId.onChange { (_, _, newPropertyId) =>
     sessions(newPropertyId)
+    issues(newPropertyId)
   }
 
   val objectAccount = ObjectProperty[Account](Account.empty)
