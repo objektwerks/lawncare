@@ -39,8 +39,8 @@ final class IssueDialog(context: Context,
   resultConverter = dialogButton =>
     if dialogButton == saveButtonType then
       issue.copy(
-        report = reportTextField.text.toString,
-        resolution = resolutionTextField.text.toString,
+        report = reportTextField.text.value,
+        resolution = resolutionTextField.text.value,
         reported = reportedDatePicker.value.value.toString,
         resolved = resolvedDatePicker.value.value.toString
       )
