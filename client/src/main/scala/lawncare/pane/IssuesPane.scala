@@ -16,10 +16,12 @@ final class IssuesPane(context: Context,
   val tableView = new TableView[Issue]():
     columns ++= List(
       new TableColumn[Issue, String]:
+        prefWidth = 300
         text = context.headerReport
         cellValueFactory = _.value.reportProperty
       ,
       new TableColumn[Issue, String]:
+        prefWidth = 300
         text = context.headerResolution
         cellValueFactory = _.value.resolutionProperty
       ,
