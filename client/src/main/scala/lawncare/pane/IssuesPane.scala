@@ -80,6 +80,7 @@ final class IssuesPane(context: Context,
     if selectedItem != null then
       model.selectedIssueId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
