@@ -50,7 +50,7 @@ final class IssuesPane(context: Context,
     children = List(addButton, editButton)
 
   val tab = new Tab:
-  	text = context.tabSessions
+  	text = context.tabIssues
   	closable = false
   	content = new VBox {
       spacing = 6
