@@ -70,8 +70,8 @@ object Session:
 
 final case class Issue(id: Long = 0,
                        propertyId: Long,
-                       report: String = "",
-                       resolution: String = "",
+                       report: String = "report",
+                       resolution: String = "resolution",
                        reported: String = Entity.now,
                        resolved: String = Entity.now) extends Entity derives CanEqual:
   val reportProperty = ObjectProperty[String](this, "report", report)
