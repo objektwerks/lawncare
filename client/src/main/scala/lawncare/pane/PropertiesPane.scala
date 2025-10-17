@@ -81,6 +81,7 @@ final class PropertiesPane(context: Context,
     if selectedItem != null then
       model.selectedPropertyId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
