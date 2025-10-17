@@ -64,6 +64,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
         id should not be 0
         testProperty = testProperty.copy(id = id)
         testSession = testSession.copy(propertyId = id)
+        testIssue = testIssue.copy(propertyId = id)
       case fault => fail(s"Invalid property saved event: $fault")
 
   def updateProperty: Unit =
@@ -106,6 +107,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
 
   def addIssue: Unit =
     val saveIssue = SaveIssue(testAccount.license, testIssue)
+    println(s"*** SaveIssue: $saveIssue")
     dispatcher.dispatch(saveIssue) match
       case IssueSaved(id) =>
         id should not be 0

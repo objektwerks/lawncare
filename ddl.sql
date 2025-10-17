@@ -29,7 +29,7 @@ CREATE TABLE session (
   watered BOOLEAN NOT NULL,
   repaired BOOLEAN NOT NULL,
   note VARCHAR NOT NULL,
-  occurred VARCHAR(10) NOT NULL
+  occurred VARCHAR NOT NULL
 );
 
 CREATE TABLE issue (
@@ -37,8 +37,8 @@ CREATE TABLE issue (
   property_id BIGINT REFERENCES property(id),
   report VARCHAR NOT NULL,
   resolution VARCHAR NOT NULL,
-  reported VARCHAR(10) NOT NULL,
-  resolved VARCHAR(10) NOT NULL
+  reported VARCHAR NOT NULL,
+  resolved VARCHAR NOT NULL
 );
 
 CREATE TABLE fault (
