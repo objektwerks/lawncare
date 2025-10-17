@@ -67,7 +67,7 @@ final class SessionDialog(context: Context,
         weeded = weededCheckBox.selected.value,
         watered = wateredCheckBox.selected.value,
         repaired = repairedCheckBox.selected.value,
-        note = noteTextField.text.toString,
-        occurred = occurredTextField.text.toString
+        note = noteTextField.text.value,
+        occurred = occurredTextField.text.value
       )
     else null
