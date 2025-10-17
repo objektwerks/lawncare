@@ -17,10 +17,6 @@ final class SessionsPane(context: Context,
 
   val tableView = new TableView[Session]():
     columns ++= List(
-      new TableColumn[Session, String]:
-        text = context.headerOccurred
-        cellValueFactory = _.value.occurredProperty
-      ,
       new TableColumn[Session, Boolean]:
         text = context.headerMowed
         cellValueFactory = _.value.mowedProperty
@@ -69,6 +65,10 @@ final class SessionsPane(context: Context,
       new TableColumn[Session, String]:
         text = context.headerNote
         cellValueFactory = _.value.noteProperty
+      ,
+      new TableColumn[Session, String]:
+        text = context.headerOccurred
+        cellValueFactory = _.value.occurredProperty
     )
     items = model.observableSessions
 
