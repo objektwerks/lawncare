@@ -25,7 +25,7 @@ final class View(context: Context, model: Model):
     orientation = Orientation.Horizontal
     items.addAll(propertiesPane, tabbedPane)
   }
-  splitPane.setDividerPositions(0.25, 0.75)
+  splitPane.setDividerPositions(0.28, 0.72)
   VBox.setVgrow(splitPane, Priority.Always)
 
   vbox.children = List(menu, splitPane)
