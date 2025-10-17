@@ -119,6 +119,7 @@ final class SessionsPane(context: Context,
     if selectedItem != null then
       model.selectedSessionId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
