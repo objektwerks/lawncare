@@ -20,7 +20,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   var testAccount = Account()
-  var testProperty = Property(accountId = 0, location = "a")
+  var testProperty = Property(accountId = 0, location = "pool")
   var testSession = Session(propertyId = 0)
   var testIssue = Issue(propertyId = 0, report = "sprinkler broken")
 
@@ -68,7 +68,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid property saved event: $fault")
 
   def updateProperty: Unit =
-    testProperty = testProperty.copy(location = "z")
+    testProperty = testProperty.copy(location = "florida pool")
     val saveProperty = SaveProperty(testAccount.license, testProperty)
     dispatcher.dispatch(saveProperty) match
       case PropertySaved(id) => id shouldBe testProperty.id
