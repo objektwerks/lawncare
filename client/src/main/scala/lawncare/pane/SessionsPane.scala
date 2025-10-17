@@ -21,10 +21,6 @@ final class SessionsPane(context: Context,
         text = context.headerOccurred
         cellValueFactory = _.value.occurredProperty
       ,
-      new TableColumn[Session, String]:
-        text = context.headerNote
-        cellValueFactory = _.value.noteProperty
-      ,
       new TableColumn[Session, Boolean]:
         text = context.headerMowed
         cellValueFactory = _.value.mowedProperty
@@ -69,6 +65,10 @@ final class SessionsPane(context: Context,
         text = context.headerRepaired
         cellValueFactory = _.value.repairedProperty
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
+      ,
+      new TableColumn[Session, String]:
+        text = context.headerNote
+        cellValueFactory = _.value.noteProperty
     )
     items = model.observableSessions
 
