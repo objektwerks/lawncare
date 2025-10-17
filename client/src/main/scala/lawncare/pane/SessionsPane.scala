@@ -63,6 +63,7 @@ final class SessionsPane(context: Context,
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Session, String]:
+        prefWidth = 200
         text = context.headerNote
         cellValueFactory = _.value.noteProperty
       ,
