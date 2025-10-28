@@ -92,13 +92,14 @@ final class PropertiesPane(context: Context,
       case _ =>
 
   def update(): Unit =
-    val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val property = tableView.selectionModel().getSelectedItem.property
-    PropertyDialog(context, property).showAndWait() match
-      case Some(property: Property) => model.update(selectedIndex, property) {
-        tableView.selectionModel().select(selectedIndex)
-      }
-      case _ =>
+    if tableView.selectionModel().getSelectedItem != null then
+      val selectedIndex = tableView.selectionModel().getSelectedIndex
+      val property = tableView.selectionModel().getSelectedItem.property
+      PropertyDialog(context, property).showAndWait() match
+        case Some(property: Property) => model.update(selectedIndex, property) {
+          tableView.selectionModel().select(selectedIndex)
+        }
+        case _ =>
 
   def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait()
 
