@@ -167,6 +167,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case SessionSaved(id) =>
             if selectedIndex > -1 then
               observableSessions.update(selectedIndex, session)      
+              observableSessions.sort(Session.sortDescByOccured)
               logger.info(s"Updated session from: $selectedIndex to: $session")
               runLast
             else
