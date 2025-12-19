@@ -214,6 +214,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case IssueSaved(id) =>
             if selectedIndex > -1 then
               observableIssues.update(selectedIndex, issue)      
+              observableIssues.sort(Issue.sortDescByReported)
               logger.info(s"Updated issue from: $selectedIndex to: $issue")
               runLast
             else
