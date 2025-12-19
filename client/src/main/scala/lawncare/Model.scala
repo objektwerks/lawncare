@@ -120,6 +120,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case PropertySaved(id) =>
             if selectedIndex > -1 then
               observableProperties.update(selectedIndex, property)
+              observableProperties.sort(Property.sortByLocation)
               logger.info(s"Updated property from: $selectedIndex to: $property")
               runLast
             else
