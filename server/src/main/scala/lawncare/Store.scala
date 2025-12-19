@@ -88,7 +88,7 @@ final class Store(cache: Cache[String, String],
 
   def listProperties(accountId: Long): List[Property] =
     DB readOnly { implicit session =>
-      sql"select * from property where account_id = $accountId order by added"
+      sql"select * from property where account_id = $accountId order by location"
         .map(rs =>
           Property(
             rs.long("id"),
