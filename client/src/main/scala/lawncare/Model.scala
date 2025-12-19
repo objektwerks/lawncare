@@ -150,7 +150,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case fault @ Fault(_, _) => onFetchFault("add session", session, fault)
           case SessionSaved(id) =>
             observableSessions.insert(0, session.copy(id = id))
-            observableSessions.sort()
+            observableSessions.sort(Session.sortDescByOccured)
             selectedSessionId.set(id)
             logger.info(s"Added session: $session")
             runLast
