@@ -103,7 +103,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case fault @ Fault(_, _) => onFetchFault("add property", property, fault)
           case PropertySaved(id) =>
             observableProperties.insert(0, property.copy(id = id))
-            observableProperties.sort()
+            observableProperties.sort(Property.sortByLocation)
             selectedPropertyId.set(id)
             logger.info(s"Added property: $property")
             runLast
