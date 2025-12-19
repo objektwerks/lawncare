@@ -197,7 +197,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           case fault @ Fault(_, _) => onFetchFault("add issue", issue, fault)
           case IssueSaved(id) =>
             observableIssues.insert(0, issue.copy(id = id))
-            observableIssues.sort()
+            observableIssues.sort(Issue.sortDescByReported)
             selectedIssueId.set(id)
             logger.info(s"Added issue: $issue")
             runLast
